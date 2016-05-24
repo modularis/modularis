@@ -1,0 +1,10 @@
+{
+  "name": "modularis",
+  "description": "",
+  "version": "0.0.1",
+  "author": "",
+  "license": "GPL v2",
+  "dependencies": {
+  },
+  "main": "gulpfile.js"
+}
