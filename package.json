@@ -6,6 +6,8 @@
   "license": "GPL v2",
   "dependencies": {
     "autoprefixer": "^6.3.6",
+    "browser-sync": "^2.12.8",
+    "browser-sync-webpack-plugin": "^1.0.1",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "import-glob-loader": "^1.1.0",

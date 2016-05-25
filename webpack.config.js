@@ -1,7 +1,9 @@
 const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 const nodeSassImportOnce = require('node-sass-import-once');
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const sassLoaders = [
   'css-loader?sourceMap',
@@ -32,7 +34,14 @@ const config = {
     publicPath: '/dist'
   },
   plugins: [
-    new ExtractTextPlugin('[name].css')
+    new ExtractTextPlugin('[name].css'),
+    new BrowserSyncPlugin(
+      {
+        host: 'localhost',
+        port: 3000,
+        server: { baseDir: ['dist'] }
+      }
+    )
   ],
   postcss: [
     autoprefixer
