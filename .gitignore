@@ -25,6 +25,6 @@ nbproject
 Thumbs.db
 
 # Folders to ignore
+app/*/
 bower_components
-dist
 node_modules

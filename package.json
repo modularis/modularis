@@ -12,9 +12,9 @@
     "postcss-cli": "^2.5.2"
   },
   "scripts": {
-    "styles:sass": "node-sass --importer ./node_modules/node-sass-magic-importer -o ./dist/css ./scss/index.scss",
-    "styles:postcss": "postcss -u autoprefixer -r ./dist/css/*",
+    "styles:sass": "node-sass --importer ./node_modules/node-sass-magic-importer -o ./app/css ./scss/index.scss",
+    "styles:postcss": "postcss -u autoprefixer -r ./app/css/*",
     "styles": "npm run styles:sass && npm run styles:postcss",
-    "serve": "browser-sync start --server './dist' --files './dist'"
+    "serve": "browser-sync start --server './app' --files './app'"
   }
 }
