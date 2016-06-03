@@ -8,10 +8,12 @@
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.12.8",
     "node-sass": "^3.7.0",
-    "node-sass-magic-importer": "0.0.1"
+    "node-sass-magic-importer": "0.0.1",
+    "postcss-cli": "^2.5.2"
   },
   "scripts": {
-    "styles:sass": "node-sass --importer ./node_modules/node-sass-magic-importer -o ./dist ./scss/index.scss",
-    "styles": "npm run styles:sass"
+    "styles:sass": "node-sass --importer ./node_modules/node-sass-magic-importer -o ./dist/css ./scss/index.scss",
+    "styles:postcss": "postcss -u autoprefixer -r dist/css/*",
+    "styles": "npm run styles:sass && npm run styles:postcss"
   }
 }
