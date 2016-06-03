@@ -14,10 +14,10 @@
     "stylelint-config-standard": "^8.0.0"
   },
   "scripts": {
-    "styles:lint": "stylelint scss/**/*.scss --syntax scss",
+    "styles:lint": "stylelint scss/**/*.scss --syntax scss || exit 0",
     "styles:sass": "node-sass --importer ./node_modules/node-sass-magic-importer -o ./app/css ./scss/index.scss",
     "styles:postcss": "postcss -u autoprefixer -r ./app/css/*",
-    "styles": "npm run styles:lint && npm run styles:sass && npm run styles:postcss",
+    "styles": "if stylelint scss/**/*.scss ; then npm run styles:sass && npm run styles:postcss ; fi",
     "serve": "browser-sync start --server './app' --files './app'"
   }
 }
