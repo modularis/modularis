@@ -8,7 +8,7 @@
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.12.8",
     "node-sass": "^3.7.0",
-    "node-sass-magic-importer": "0.0.1",
+    "node-sass-magic-importer": "^0.0.2",
     "postcss-cli": "^2.5.2",
     "stylelint": "^6.5.1",
     "stylelint-config-standard": "^8.0.0"
