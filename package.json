@@ -7,6 +7,7 @@
   "dependencies": {
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.12.8",
+    "clean-css": "^3.4.17",
     "node-sass": "^3.7.0",
     "node-sass-magic-importer": "^0.0.3",
     "onchange": "^2.4.0",
@@ -19,7 +20,8 @@
     "styles:lint": "stylelint scss/**/*.scss --syntax scss || exit 0",
     "styles:sass": "node-sass --source-map-embed --source-map-root / --importer ./node_modules/node-sass-magic-importer -o ./app/css ./scss/index.scss",
     "styles:postcss": "postcss -u autoprefixer -r ./app/css/*",
-    "styles": "if stylelint scss/**/*.scss ; then npm run styles:sass && npm run styles:postcss ; fi",
+    "styles:minify": "cleancss --output ./app/css/index.min.css ./app/css/index.css",
+    "styles": "if stylelint scss/**/*.scss ; then npm run styles:sass && npm run styles:postcss && npm run styles:minify ; fi",
     "serve": "browser-sync start --server './app' --files './app'",
     "watch:styles": "onchange './scss/**/*.scss' -- npm run styles",
     "watch": "parallelshell 'npm run serve' 'npm run watch:styles'"
