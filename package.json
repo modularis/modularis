@@ -9,6 +9,7 @@
     "browser-sync": "^2.12.8",
     "node-sass": "^3.7.0",
     "node-sass-magic-importer": "^0.0.3",
+    "onchange": "^2.4.0",
     "postcss-cli": "^2.5.2",
     "stylelint": "^6.5.1",
     "stylelint-config-standard": "^8.0.0"
@@ -18,6 +19,7 @@
     "styles:sass": "node-sass --source-map-embed --source-map-root / --importer ./node_modules/node-sass-magic-importer -o ./app/css ./scss/index.scss",
     "styles:postcss": "postcss -u autoprefixer -r ./app/css/*",
     "build:styles": "if stylelint scss/**/*.scss ; then npm run styles:sass && npm run styles:postcss ; fi",
-    "serve": "browser-sync start --server './app' --files './app'"
+    "serve": "browser-sync start --server './app' --files './app'",
+    "watch:styles": "onchange './scss/**/*.scss' -- npm run build:styles"
   }
 }
