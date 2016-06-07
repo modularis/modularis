@@ -31,8 +31,8 @@
     "stylelint-config-standard": "^8.0.0"
   },
   "scripts": {
-    "styles:sass": "node-sass --source-map-embed --source-map-root / --importer ./node_modules/node-sass-magic-importer -o ./app/css ./scss/index.scss",
-    "styles:postcss": "postcss -u autoprefixer -r ./app/css/*",
+    "styles:sass": "node-sass --source-map-embed --source-map-root / --importer ./node_modules/node-sass-magic-importer --output ./app/css ./scss/index.scss",
+    "styles:postcss": "postcss --use autoprefixer --replace ./app/css/*",
     "styles:minify": "cleancss --output ./app/css/index.min.css ./app/css/index.css",
     "styles:lint": "stylelint scss/**/*.scss --syntax scss || exit 0",
     "styles": "npm run styles:sass && npm run styles:postcss && npm run styles:minify && npm run styles:lint",
