@@ -22,13 +22,19 @@
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.12.8",
     "clean-css": "^3.4.17",
+    "left-pad": "^1.1.0",
     "node-sass": "^3.7.0",
     "node-sass-magic-importer": "^0.0.3",
     "onchange": "^2.4.0",
     "parallelshell": "^2.0.0",
     "postcss-cli": "^2.5.2",
+    "rollup": "^0.28.0",
+    "rollup-plugin-buble": "^0.10.0",
+    "rollup-plugin-commonjs": "^3.0.0",
+    "rollup-plugin-node-resolve": "^1.7.0",
     "stylelint": "^6.5.1",
-    "stylelint-config-standard": "^8.0.0"
+    "stylelint-config-standard": "^8.0.0",
+    "uglify-js": "^2.6.2"
   },
   "scripts": {
     "styles:sass": "node-sass --source-map-embed --source-map-root / --importer ./node_modules/node-sass-magic-importer --output ./app/css ./scss/index.scss",
@@ -36,8 +42,12 @@
     "styles:minify": "cleancss --output ./app/css/index.min.css ./app/css/index.css",
     "styles:lint": "stylelint scss/**/*.scss --syntax scss || exit 0",
     "styles": "npm run styles:sass && npm run styles:postcss && npm run styles:minify && npm run styles:lint",
+    "scripts:bundle": "rollup --config --sourcemap inline --output app/js/index.js js/index.js",
+    "scripts:minify": "uglifyjs --compress --output ./app/js/index.min.js ./app/js/index.js",
+    "scripts": "npm run scripts:bundle && npm run scripts:minify",
     "serve": "browser-sync start --server './app' --files './app'",
     "watch:styles": "onchange './scss/**/*.scss' -- npm run styles",
-    "watch": "parallelshell 'npm run serve' 'npm run watch:styles'"
+    "watch:scripts": "onchange './js/**/*.js' -- npm run scripts",
+    "watch": "parallelshell 'npm run serve' 'npm run watch:styles' 'npm run watch:scripts'"
   }
 }
