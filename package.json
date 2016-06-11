@@ -22,7 +22,6 @@
     "autoprefixer": "^6.3.6",
     "browser-sync": "^2.12.8",
     "clean-css": "^3.4.17",
-    "left-pad": "^1.1.0",
     "node-sass": "^3.7.0",
     "node-sass-magic-importer": "^0.0.3",
     "onchange": "^2.4.0",
