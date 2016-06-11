@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "autoprefixer": "^6.3.6",
+    "backstopjs": "^1.2.1",
     "browser-sync": "^2.12.8",
     "clean-css": "^3.4.17",
     "node-sass": "^3.7.0",
@@ -47,6 +48,8 @@
     "serve": "browser-sync start --server './app' --files './app'",
     "watch:styles": "onchange './scss/**/*.scss' -- npm run styles",
     "watch:scripts": "onchange './js/**/*.js' -- npm run scripts",
-    "watch": "parallelshell 'npm run serve' 'npm run watch:styles' 'npm run watch:scripts'"
+    "watch": "parallelshell 'npm run serve' 'npm run watch:styles' 'npm run watch:scripts'",
+    "test:reference": "cd ./node_modules/backstopjs && npm run reference",
+    "test": "cd ./node_modules/backstopjs && npm run test"
   }
 }
