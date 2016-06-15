@@ -12,7 +12,9 @@
     "string-quotes": "single",
     "value-no-vendor-prefix": true,
     "property-no-vendor-prefix": true,
-    "max-nesting-depth": 1,
+    "max-nesting-depth": [1, {
+      ignore: ["at-rules-without-declaration-blocks"]
+    }],
     "no-descending-specificity": true,
     "no-indistinguishable-colors": true
   }
