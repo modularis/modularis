@@ -54,10 +54,12 @@
     "watch:styles": "onchange './scss/**/*.scss' -- npm run styles",
     "watch:scripts": "onchange './js/**/*.js' -- npm run scripts",
     "watch": "parallelshell 'npm run serve' 'npm run watch:styles' 'npm run watch:scripts'",
+    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "test:reference": "cd ./node_modules/backstopjs && npm run reference",
     "test": "cd ./node_modules/backstopjs && npm run test"
   },
   "pre-commit": [
+    "precommit-msg",
     "styles:lint",
     "scripts:lint"
   ]
