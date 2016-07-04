@@ -1,4 +1,6 @@
 # modularis
+modularis is a boilerplate project for modular web apps.
+
 ## About
 ### Author
 Markus Oberlehner  
