@@ -59,11 +59,11 @@
     "test:styles": "npm run test:styles:lint && npm run test:styles:regression",
     "test:scripts:lint": "jshint js/index.js",
     "test:scripts:lint-no-error": "jshint js/index.js || exit 0",
-    "test:scripts": "npm run test:scripts:lint"
+    "test:scripts": "npm run test:scripts:lint",
+    "test": "npm run test:styles && npm run test:scripts"
   },
   "pre-commit": [
     "precommit-msg",
-    "test:styles:lint",
-    "test:scripts:lint"
+    "test"
   ]
 }
