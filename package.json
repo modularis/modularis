@@ -23,9 +23,11 @@
     "autoprefixer": "^6.3.6",
     "backstopjs": "^1.3.5",
     "browser-sync": "^2.13.0",
+    "chai": "^3.5.0",
     "chokidar-cli": "^1.2.0",
     "clean-css": "^3.4.18",
     "jshint": "^2.9.2",
+    "mocha": "^2.5.3",
     "node-sass": "^3.8.0",
     "node-sass-magic-importer": "^0.1.4",
     "parallelshell": "^2.0.0",
@@ -59,7 +61,8 @@
     "test:styles": "npm run test:styles:lint && npm run test:styles:regression",
     "test:scripts:lint": "jshint js/index.js",
     "test:scripts:lint-no-error": "jshint js/index.js || exit 0",
-    "test:scripts": "npm run test:scripts:lint",
+    "test:scripts:mocha": "mocha",
+    "test:scripts": "npm run test:scripts:lint && npm run test:scripts:mocha",
     "test": "npm run test:styles && npm run test:scripts"
   },
   "pre-commit": [
