@@ -40,10 +40,10 @@
     }
   ],
   "paths": {
-    "bitmaps_reference": "../../tests/bitmaps_reference",
-    "bitmaps_test": "../../tests/bitmaps_test",
-    "compare_data": "../../tests/bitmaps_test/compare.json",
-    "casper_scripts": "../../tests/casper_scripts"
+    "bitmaps_reference": "../../test/styles-regression/bitmaps_reference",
+    "bitmaps_test": "../../test/styles-regression/bitmaps_test",
+    "compare_data": "../../test/styles-regression/bitmaps_test/compare.json",
+    "casper_scripts": "../../test/styles-regression/casper_scripts"
   },
   "engine": "phantomjs",
   "report": ["CLI", "browser"],

@@ -28,4 +28,3 @@ Thumbs.db
 app/*/
 bower_components
 node_modules
-tests
