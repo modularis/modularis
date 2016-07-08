@@ -43,7 +43,7 @@
   },
   "scripts": {
     "styles:sass": "node-sass --source-map-embed --source-map-root / --importer node_modules/node-sass-magic-importer --output app/css scss/index.scss",
-    "styles:postcss": "postcss --use autoprefixer --replace app/css/*",
+    "styles:postcss": "postcss --use autoprefixer --replace app/css/index.css",
     "styles:minify": "cleancss --output app/css/index.min.css app/css/index.css",
     "styles": "npm run styles:sass && npm run styles:postcss && npm run styles:minify && npm run test:styles:lint-no-error",
     "scripts:bundle": "rollup --config --sourcemap inline --format iife --output app/js/index.js js/index.js",
