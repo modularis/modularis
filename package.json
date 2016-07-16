@@ -39,7 +39,8 @@
     "rollup-plugin-node-resolve": "^1.7.1",
     "stylelint": "^6.8.0",
     "stylelint-config-standard": "^10.0.0",
-    "uglify-js": "^2.7.0"
+    "uglify-js": "^2.7.0",
+    "zombie": "^4.2.1"
   },
   "scripts": {
     "styles:sass": "node-sass --source-map-embed --source-map-root / --importer node_modules/node-sass-magic-importer --output app/css scss/index.scss",
@@ -61,7 +62,8 @@
     "test:styles:reference": "cd node_modules/backstopjs && npm run reference",
     "test:styles": "cd node_modules/backstopjs && npm run test",
     "test:scripts": "mocha",
-    "test": "npm run test:styles && npm run test:scripts"
+    "test:browser": "mocha test/browser.js --timeout 20000",
+    "test": "npm run test:styles && npm run test:scripts && npm run test:browser"
   },
   "pre-commit": [
     "precommit-msg",
