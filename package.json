@@ -68,7 +68,6 @@
   "pre-commit": [
     "precommit-msg",
     "styles:lint",
-    "scripts:lint",
-    "test"
+    "scripts:lint"
   ]
 }
