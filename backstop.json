@@ -30,9 +30,9 @@
         "#__bs_notify__"
       ],
       "selectors": [
-        ".test-header",
-        ".test-main",
-        ".test-footer"
+        ".qa-header",
+        ".qa-main",
+        ".qa-footer"
       ],
       "readyEvent": null,
       "delay": 500,
