@@ -60,7 +60,7 @@
     "watch": "parallelshell 'npm run serve' 'npm run watch:styles' 'npm run watch:scripts'",
     "test:styles:reference": "cd node_modules/backstopjs && npm run reference",
     "test:styles": "cd node_modules/backstopjs && npm run test",
-    "test:scripts": "mocha",
+    "test:scripts": "mocha test/unit.js",
     "test:browser": "mocha test/browser.js --timeout 60000",
     "test": "npm run test:styles && npm run test:scripts && npm run test:browser"
   },
