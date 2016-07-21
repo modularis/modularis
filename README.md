@@ -8,6 +8,24 @@ modularis is a boilerplate project for modular web apps.
 - Run `npm install` inside your newly created project directory.
 - Run `npm run watch` to start the watch process and a Browsersync server.
 
+## Development
+See [CONTRIBUTING.md](https://github.com/modularis/modularis/blob/dev/CONTRIBUTING.md)
+
+### Testing
+```bash
+# Run all tests
+npm test
+
+# Style tests
+npm run test:styles
+
+# Script tests
+npm run test:scripts
+
+# Browser tests
+npm run test:browser
+```
+
 ## About
 ### Author
 Markus Oberlehner  
