@@ -2,7 +2,8 @@
   "extends": "stylelint-config-standard",
   "rules": {
     "at-rule-empty-line-before": ["always", {
-      except: ["all-nested", "blockless-group"]
+      "except": ["all-nested", "blockless-group"],
+      "ignore": ["after-comment"]
     }],
     "block-closing-brace-newline-after": ["always", {
       "ignoreAtRules": ["if", "else"]
@@ -13,7 +14,7 @@
     "value-no-vendor-prefix": true,
     "property-no-vendor-prefix": true,
     "max-nesting-depth": [1, {
-      ignore: ["at-rules-without-declaration-blocks"]
+      "ignore": ["at-rules-without-declaration-blocks"]
     }],
     "no-descending-specificity": true,
     "no-indistinguishable-colors": true
