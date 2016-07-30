@@ -14,6 +14,32 @@
     </header>
     <main class="qa-main">
       <p>Hello world!</p>
+      <div fjs-component="Counter" fjs-data="some/url">
+        <button fjs-element="down">Down</button>
+        <div fjs-element="number">1</div>
+        <button fjs-element="up">Up</button>
+      </div>
+      <ul fjs-component="List">
+        <li fjs-element="items[]">Item 1</li>
+        <li fjs-element="items[]">Item 2</li>
+      </ul>
+      <div fjs-component="ContentList" fjs-repeat>
+        <div fjs-element="items[]">
+          <img fjs-element="image" src="some/url" alt="">
+          <p fjs-element="body">Lorem Ipsum</p>
+          <a fjs-element="link" href="some/url">Link</a>
+        </div>
+        <div fjs-element="items[]">
+          <img fjs-element="image" src="some/url" alt="">
+          <p fjs-element="body">Lorem Ipsum</p>
+          <a fjs-element="link" href="some/url">Link</a>
+        </div>
+        <div fjs-element="items[]">
+          <img fjs-element="image" src="some/url" alt="">
+          <p fjs-element="body">Lorem Ipsum</p>
+          <a fjs-element="link" href="some/url">Link</a>
+        </div>
+      </div>
     </main>
     <footer class="qa-footer">
       &copy; modularis
