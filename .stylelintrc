@@ -1,5 +1,5 @@
 {
-  "extends": "stylelint-config-standard",
+  "extends": "stylelint-config-modularis",
   "rules": {
     "at-rule-empty-line-before": ["always", {
       "except": ["all-nested", "blockless-group"],

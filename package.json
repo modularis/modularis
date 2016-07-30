@@ -44,7 +44,7 @@
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "stylelint": "^7.0.2",
-    "stylelint-config-standard": "^11.0.0",
+    "stylelint-config-modularis": "0.0.1",
     "uglify-js": "^2.7.0",
     "webpack": "^1.13.1",
     "zombie": "^4.2.1"
