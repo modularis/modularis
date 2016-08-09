@@ -7,9 +7,7 @@ const request = new Request('/template/button');
 
 fetch(request)
   .then((response) => {
-    response.blob().then(res => {
-      console.log(res);
-    });
+    response.text().then(dings => console.log(dings));
   }).catch((error) => {
     console.log(error);
   });
