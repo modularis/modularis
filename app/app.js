@@ -1,21 +1,21 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 
-const TemplateLoader = require('./lib/TemplateLoader.js');
+const ViewLoader = require('./lib/ViewLoader.js');
 
 const app = express();
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+app.engine('.hbs', exphbs({ extname: '.hbs' }));
+app.set('view engine', '.hbs');
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-  res.render('index');
+app.get('/', (request, response) => {
+  response.render('index');
 });
 
-app.get('/template/:template', (req, res) => {
-  const templateLoader = new TemplateLoader(req, res);
-  templateLoader.deliver();
+app.get('/view-loader/:view', (request, response) => {
+  const viewLoader = new ViewLoader(request, response);
+  viewLoader.deliver();
 });
 
 app.listen(2999);
