@@ -1,5 +1,5 @@
 const Browser = require('zombie');
-Browser.localhost('example.com', 3000);
+Browser.localhost('example.com', 2999);
 
 describe('User visits homepage', () => {
   const browser = new Browser();
