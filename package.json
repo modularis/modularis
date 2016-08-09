@@ -53,7 +53,8 @@
   },
   "scripts": {
     "webpack": "webpack",
-    "serve": "browser-sync start --server app --files app",
+    "serve": "cd app && node app.js",
+    "browser-sync": "browser-sync start --proxy localhost:2999 --files app/public",
     "styles:sass": "node-sass --source-map-embed --source-map-root / --importer node_modules/node-sass-magic-importer --output app/public/css scss/index.scss",
     "styles:postcss": "postcss --use autoprefixer --replace app/public/css/index.css",
     "styles:minify": "cleancss --output app/public/css/index.min.css app/public/css/index.css",
@@ -67,7 +68,7 @@
     "scripts": "npm run scripts:bundle && npm run scripts:minify && npm run scripts:lint-no-error",
     "watch:styles": "chokidar scss/**/*.scss -c 'npm run styles'",
     "watch:scripts": "chokidar js/**/*.js -c 'npm run scripts'",
-    "watch": "parallelshell 'npm run serve' 'npm run watch:styles' 'npm run watch:scripts'",
+    "watch": "parallelshell 'npm run serve' 'npm run browser-sync' 'npm run watch:styles' 'npm run watch:scripts'",
     "test:styles:reference": "cd node_modules/backstopjs && npm run reference",
     "test:styles": "cd node_modules/backstopjs && npm run test",
     "test:scripts": "mocha test/unit.js",
