@@ -77,7 +77,7 @@
     "test:browser": "mocha test/browser.js --timeout 60000",
     "test": "npm run test:styles && npm run test:scripts && npm run test:browser"
   },
-  "config": {
+  "configDisabled": {
     "pre-git": {
       "pre-commit": [
         "npm run styles:lint",
