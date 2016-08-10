@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const Handlebars = require('handlebars');
 
 module.exports = class ViewLoader {
   constructor(request, response) {
@@ -21,6 +22,10 @@ module.exports = class ViewLoader {
   }
 
   deliver() {
-    this.load().then(data => this.response.send(data));
+    this.load().then(data => {
+      // @TODO: Use uglify.
+      const precompiledData = Handlebars.precompile(data);
+      this.response.send(precompiledData);
+    });
   }
 };

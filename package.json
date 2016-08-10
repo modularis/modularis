@@ -87,5 +87,14 @@
         "npm test"
       ]
     }
+  },
+  "config": {
+    "pre-git": {
+      "pre-commit": [],
+      "pre-push": [],
+      "post-commit": [],
+      "post-checkout": [],
+      "post-merge": []
+    }
   }
 }
