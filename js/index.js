@@ -46,5 +46,8 @@ function componentLoader() {
 componentLoader().then(component => {
   const button = new Function('return ' + component[0]);
   const template = HandlebarsRuntime.template(button());
-  console.log(template({ title: 'GEIL' }));
+  const $button = document.querySelector('.c-button');
+  const $newButton = template({ title: 'GEIL' });
+
+  $button.outerHTML = $newButton;
 });
