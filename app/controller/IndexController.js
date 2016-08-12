@@ -1,4 +1,4 @@
-//const exphbs = require('express-handlebars');
+// const exphbs = require('express-handlebars');
 
 module.exports = class IndexController {
   constructor(request, response) {
