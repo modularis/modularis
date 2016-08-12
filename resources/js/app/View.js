@@ -43,7 +43,13 @@ export default class View {
   extractData() {
     return new Promise((promiseResolve) => {
       // @TODO: get real data.
-      promiseResolve({ title: this.el.dataset.title });
+      const data = {};
+      if (this.el.dataset.cName) {
+        data[this.el.dataset.cName] = this.el.dataset.cValue || this.el.innerHTML;
+      }
+      // console.log(this.el.dataset.cName);
+      // console.log(this.el.querySelectorAll('[data-c-name]'));
+      promiseResolve(data);
     });
   }
 
