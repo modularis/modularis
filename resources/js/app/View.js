@@ -19,7 +19,6 @@ export default class View {
           response.text().then(template => {
             const compile = new Function('return ' + template);
             promiseResolve(Handlebars.template(compile()));
-console.log(Handlebars);
           });
         }).catch((error) => {
           console.log(error);
