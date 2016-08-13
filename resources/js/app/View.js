@@ -1,5 +1,5 @@
 /* eslint-env browser */
-import HandlebarsRuntime from 'handlebars/runtime';
+import Handlebars from 'handlebars/runtime';
 
 export default class View {
   constructor($el) {
@@ -18,7 +18,8 @@ export default class View {
         .then((response) => {
           response.text().then(template => {
             const compile = new Function('return ' + template);
-            promiseResolve(HandlebarsRuntime.template(compile()));
+            promiseResolve(Handlebars.template(compile()));
+console.log(Handlebars);
           });
         }).catch((error) => {
           console.log(error);
