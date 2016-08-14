@@ -26,6 +26,7 @@ Thumbs.db
 
 # Folders to ignore
 /app/public
+bitmaps_test
 bower_components
 node_modules
-bitmaps_test
+sitespeed-result
