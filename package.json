@@ -35,6 +35,7 @@
     "eslint-plugin-import": "^1.12.0",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
+    "htmllint-cli": "0.0.5",
     "mocha": "^3.0.1",
     "node-sass": "^3.8.0",
     "node-sass-magic-importer": "^0.1.4",
@@ -69,6 +70,9 @@
     "scripts:lint": "eslint resources/js/index.js",
     "scripts:lint-no-error": "eslint resources/js/index.js || exit 0",
     "scripts": "npm run scripts:bundle && npm run scripts:minify && npm run scripts:lint-no-error",
+    "html:lint": "htmllint resources/**/*.hbs",
+    "html:lint-no-error": "htmllint resources/**/*.hbs || exit 0",
+    "html": "npm run html:lint-no-error",
     "watch:styles": "chokidar resources/scss/**/*.scss -c 'npm run styles'",
     "watch:scripts": "chokidar resources/js/**/*.js -c 'npm run scripts'",
     "watch": "parallelshell 'npm run serve' 'npm run browser-sync' 'npm run watch:styles' 'npm run watch:scripts'",
@@ -83,7 +87,8 @@
     "pre-git": {
       "pre-commit": [
         "npm run styles:lint",
-        "npm run scripts:lint"
+        "npm run scripts:lint",
+        "npm run html:lint"
       ],
       "pre-push": [
         "npm test"
