@@ -1,5 +1,5 @@
 /* eslint-env browser */
-import View from './View.js';
+import View from './view.js';
 
 export default class Component {
   constructor($el, templatePath) {
