@@ -1,4 +1,4 @@
-import Component from '../../js/app/Component.js';
+import Component from '../../js/app/component.js';
 
 export default class Card extends Component {
 

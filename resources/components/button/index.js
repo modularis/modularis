@@ -1,5 +1,10 @@
-import Component from '../../js/app/Component.js';
+import app from '../../js/app/app.js';
+
+import Component from '../../js/app/component.js';
 
 export default class Button extends Component {
-
+  constructor($el, templatePath) {
+    super($el, templatePath);
+    console.log(app);
+  }
 }
