@@ -1,4 +1,3 @@
-/* eslint-env browser */
 class App {
   boot(Controller) {
     const $controllerRoot = document.querySelector('body');

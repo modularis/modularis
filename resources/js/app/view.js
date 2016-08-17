@@ -1,4 +1,3 @@
-/* eslint-env browser */
 import Handlebars from 'handlebars/runtime';
 
 export default class View {

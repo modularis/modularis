@@ -1,4 +1,3 @@
-/* eslint-env browser */
 import View from './view.js';
 
 export default class Component {
