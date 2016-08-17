@@ -20,20 +20,20 @@ export default class Component {
       el: $el
     };
 
-    this.boot();
+    this.init();
 
     return this;
   }
 
-  boot() {
+  init() {
     this.load().then((componentData) => {
       this.template = componentData[0];
       this.data = componentData[1];
-      this.init();
+      this.boot();
     });
   }
 
-  init() {
+  boot() {
     this.render();
   }
 

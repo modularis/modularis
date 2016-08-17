@@ -1,5 +1,12 @@
 export default class Controller {
   constructor() {
-    this.templates = {};
+    this.cmp = {};
+    this.init();
   }
+
+  init() {
+    this.registerComponents();
+  }
+
+  registerComponents() { }
 }
