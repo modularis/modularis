@@ -1,3 +1,5 @@
+// @TODO: only load templates if not already loaded or cached
+// @TODO: cache templates
 import Handlebars from 'handlebars/runtime';
 
 export default class View {
@@ -23,6 +25,7 @@ export default class View {
     });
   }
 
+  // @TODO move into component?
   loadData(path) {
     return new Promise((promiseResolve) => {
       const headers = new Headers();

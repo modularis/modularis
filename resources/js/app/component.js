@@ -1,3 +1,4 @@
+// @TODO: load initial data
 import View from './view.js';
 
 export default class Component {

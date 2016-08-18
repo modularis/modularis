@@ -1,5 +1,3 @@
-// const exphbs = require('express-handlebars');
-
 module.exports = class IndexController {
   constructor(request, response) {
     this.request = request;
