@@ -12,13 +12,13 @@ export default class View {
       fetch(request)
         .then((response) => {
           response.text().then(template => {
-            const compile = new Function('return ' + template);
+            const compile = new Function(`return ${template}`); // eslint-disable-line no-new-func
             this.template = Handlebars.template(compile());
             Handlebars.registerPartial(templatePath, this.template);
             promiseResolve(true);
           });
         }).catch((error) => {
-          console.log(error);
+          console.log(error); // eslint-disable-line no-console
         });
     });
   }
@@ -32,7 +32,7 @@ export default class View {
         .then((response) => {
           response.text().then(json => promiseResolve(json));
         }).catch((error) => {
-          console.log(error);
+          console.log(error); // eslint-disable-line no-console
         });
     });
   }

@@ -22,20 +22,5 @@ export default class Component {
     return this;
   }
 
-  init() {
-    console.log(this);
-  }
-
-  boot() {
-    // this.render();
-  }
-
-  load() {
-    // return new Promise((promiseResolve) => {
-    //   Promise.all([
-    //     this.view.loadTemplate(this.templatePath),
-    //     this.view.extractData(this.dom.el)
-    //   ]).then(componentData => promiseResolve(componentData));
-    // });
-  }
+  init() {}
 }
