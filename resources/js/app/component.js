@@ -7,12 +7,11 @@ export default class Component {
       throw new Error(`${this.constructor.name} has no DOM $el`);
     }
 
-    this.templatePath = templatePath.split('/').join('.');
+    this.templatePath = templatePath;
 
     this.view = new View($el);
 
     // Component data.
-    this.template = '';
     this.data = {};
 
     // Dom bindings.
@@ -20,34 +19,23 @@ export default class Component {
       el: $el
     };
 
-    this.init();
-
     return this;
   }
 
   init() {
-    this.load().then((componentData) => {
-      this.template = componentData[0];
-      this.data = componentData[1];
-      this.boot();
-    });
+    console.log(this);
   }
 
   boot() {
-    this.render();
-  }
-
-  render() {
-    const markup = this.template(this.data);
-    this.dom.el = View.replaceElement(this.dom.el, markup);
+    // this.render();
   }
 
   load() {
-    return new Promise((promiseResolve) => {
-      Promise.all([
-        this.view.loadTemplate(this.templatePath),
-        this.view.extractData(this.dom.el)
-      ]).then(componentData => promiseResolve(componentData));
-    });
+    // return new Promise((promiseResolve) => {
+    //   Promise.all([
+    //     this.view.loadTemplate(this.templatePath),
+    //     this.view.extractData(this.dom.el)
+    //   ]).then(componentData => promiseResolve(componentData));
+    // });
   }
 }

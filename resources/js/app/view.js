@@ -3,21 +3,19 @@ import Handlebars from 'handlebars/runtime';
 export default class View {
   constructor($el) {
     this.el = $el;
-    this.viewStore = {};
-  }
-
-  store(view, path) {
-    this.viewStore[path] = view;
+    this.template = null;
   }
 
   loadTemplate(templatePath) {
     return new Promise((promiseResolve) => {
-      const request = new Request(`/view-loader/${templatePath}`);
+      const request = new Request(`/view-loader/${templatePath.split('/').join('.')}`);
       fetch(request)
         .then((response) => {
           response.text().then(template => {
             const compile = new Function('return ' + template);
-            promiseResolve(Handlebars.template(compile()));
+            this.template = Handlebars.template(compile());
+            Handlebars.registerPartial(templatePath, this.template);
+            promiseResolve(true);
           });
         }).catch((error) => {
           console.log(error);
@@ -39,30 +37,19 @@ export default class View {
     });
   }
 
-  extractData() {
-    return new Promise((promiseResolve) => {
-      // @TODO: get real data.
-      const data = {};
-      if (this.el.dataset.cName) {
-        data[this.el.dataset.cName] = this.el.dataset.cValue || this.el.innerHTML;
-      }
-      // console.log(this.el.dataset.cName);
-      // console.log(this.el.querySelectorAll('[data-c-name]'));
-      promiseResolve(data);
-    });
-  }
+  render(data = {}) {
+    const $parentNode = this.el.parentNode;
+    if (!$parentNode) return false;
 
-  static replaceElement($el, markup) {
+    const markup = this.template(data);
     const $elWrap = document.createElement('div');
     $elWrap.innerHTML = markup;
 
     const $newEl = $elWrap.firstChild;
-    const $parentNode = $el.parentNode;
 
-    if (!$parentNode) return false;
+    $parentNode.replaceChild($newEl, this.el);
 
-    $parentNode.replaceChild($newEl, $el);
-
+    this.el = $newEl;
     return $newEl;
   }
 }
