@@ -1,12 +1,12 @@
 import Component from '../../js/app/component.js';
 
 export default class Button extends Component {
-  constructor($el) {
+  constructor($el, controller = null) {
     const templatePath = 'components/button/template';
-    super($el, templatePath);
+    super($el, templatePath, controller);
   }
 
-  init() {
+  boot() {
     this.view.render({ title: 'Hallo Welt wie gehts' });
   }
 }

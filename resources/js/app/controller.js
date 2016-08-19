@@ -11,7 +11,7 @@ export default class Controller {
   }
 
   boot() {
-    Object.keys(this.cmp).forEach(cmpName => this.cmp[cmpName].init());
+    Object.keys(this.cmp).forEach(cmpName => this.cmp[cmpName].boot());
   }
 
   registerComponents() {}
