@@ -5,7 +5,7 @@ module.exports = class IndexController {
   }
 
   index() {
-    const data = { title: 'Test' };
+    const data = { title: 'Test', button: { title: 'Test Button' } };
     if (this.request.headers.accept && this.request.headers.accept.indexOf('json') > -1) {
       this.response.json(data);
     } else {
