@@ -4,7 +4,7 @@ const config = {
     '/css/index.css',
     '/js/index.js'
   ],
-  cachePathPattern: /^\/(css|js|view-loader)\/(.*)$/
+  cachePathPattern: /^\/(.*)$/
 };
 
 function cacheName(key, opts) {
