@@ -25,7 +25,8 @@ nbproject
 Thumbs.db
 
 # Folders to ignore
-/app/public
+/app/public/*
+!/app/public/serviceWorker.js
 bitmaps_test
 bower_components
 node_modules
