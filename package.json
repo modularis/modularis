@@ -61,7 +61,7 @@
     "styles:lint": "stylelint resources/scss/**/*.scss --syntax scss",
     "styles:lint-no-error": "stylelint resources/scss/**/*.scss --syntax scss || exit 0",
     "styles": "npm run styles:sass && npm run styles:postcss && npm run styles:minify && npm run styles:lint-no-error",
-    "scripts:bundle": "node resources/js/bundle.js",
+    "scripts:bundle": "node build/scripts-bundle.js",
     "scripts:minify": "uglifyjs --compress --output app/public/js/index.min.js app/public/js/index.js",
     "scripts:lint": "eslint 'resources/**/*.js'",
     "scripts:lint-no-error": "eslint 'resources/**/*.js' || exit 0",
