@@ -24,7 +24,7 @@
   "scenarios": [
     {
       "label": "modularis",
-      "url": "http://localhost:3000",
+      "url": "http://localhost:2999",
       "hideSelectors": [],
       "removeSelectors": [
         "#__bs_notify__"
