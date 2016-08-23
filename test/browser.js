@@ -1,4 +1,6 @@
+/* eslint-env node, mocha */
 const Browser = require('zombie');
+
 Browser.localhost('example.com', 2999);
 
 describe('User visits homepage', () => {
@@ -7,7 +9,7 @@ describe('User visits homepage', () => {
   before((done) => {
     browser.visit('', done);
   });
- 
+
   it('should be successful', () => {
     browser.assert.success();
   });

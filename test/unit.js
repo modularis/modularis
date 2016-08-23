@@ -1,13 +1,14 @@
+/* eslint-env node, mocha */
 describe('modularis', () => {
-  const expect = require('chai').expect;
+  // const expect = require('chai').expect;
 
-  it('should be TEST CASE', () => {
+  // it('should be TEST CASE', () => {
 
-  });
+  // });
 
-  describe('#NESTED()', () => {
-    it('should be NESTED TEST CASE', () => {
+  // describe('#NESTED()', () => {
+  //   it('should be NESTED TEST CASE', () => {
 
-    });
-  });
+  //   });
+  // });
 });
