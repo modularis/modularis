@@ -10,10 +10,6 @@ export default class Controller {
     this.registerTemplates().then(() => this.boot());
   }
 
-  boot() {
-    Object.keys(this.cmp).forEach(cmpName => this.cmp[cmpName].boot());
-  }
-
   registerComponents() {}
 
   registerTemplates() {
@@ -23,5 +19,9 @@ export default class Controller {
       return loaders;
     }, []);
     return Promise.all(templateLoaders);
+  }
+
+  boot() {
+    Object.keys(this.cmp).forEach(cmpName => this.cmp[cmpName].boot());
   }
 }
