@@ -1,16 +1,18 @@
 export default class Controller {
   constructor() {
     this.cmp = {};
-    this.templates = {};
     this.init();
   }
 
   init() {
-    this.registerComponents();
-    this.registerTemplates().then(() => this.boot());
+    this.registerComponents()
+      .then(() => this.registerTemplates()
+        .then(() => this.boot()));
   }
 
-  registerComponents() {}
+  registerComponents() {
+    return Promise.resolve(true);
+  }
 
   registerTemplates() {
     const templateLoaders = Object.keys(this.cmp).reduce((loaders, cmpName) => {

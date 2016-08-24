@@ -5,11 +5,10 @@ import Card from '../../components/card/index.js';
 
 class Index extends Controller {
   registerComponents() {
-    this.cmp.card = new Card(document.querySelector('.c-card'), this);
-  }
-
-  boot() {
-    super.boot();
+    return new Promise((promiseResolve) => {
+      this.cmp.card = new Card(document.querySelector('.c-card'), this);
+      promiseResolve(true);
+    });
   }
 }
 

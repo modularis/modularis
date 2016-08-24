@@ -8,8 +8,11 @@ class App {
   }
 
   registerController(Controller) {
-    const $controllerRoot = document.querySelector('body');
-    this.controller = new Controller($controllerRoot);
+    return new Promise((promiseResolve) => {
+      const $controllerRoot = document.querySelector('body');
+      this.controller = new Controller($controllerRoot);
+      promiseResolve();
+    });
   }
 }
 

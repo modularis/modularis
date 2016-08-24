@@ -9,7 +9,10 @@ export default class Card extends Component {
   }
 
   registerComponents() {
-    this.controller.cmp.button = new Button(document.querySelector('.c-button'));
+    return new Promise((promiseResolve) => {
+      this.controller.cmp.button = new Button(document.querySelector('.c-button'));
+      promiseResolve(true);
+    });
   }
 
   boot() {
