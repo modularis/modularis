@@ -15,6 +15,7 @@ export default class Controller {
   }
 
   registerTemplates() {
+    // @TODO: maybe move functionality into register components method.
     const templateLoaders = Object.keys(this.cmp).reduce((loaders, cmpName) => {
       const component = this.cmp[cmpName];
       loaders.push(component.view.loadTemplate(component.templatePath));
