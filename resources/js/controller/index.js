@@ -13,4 +13,4 @@ class Index extends Controller {
   }
 }
 
-app.init(Index);
+app.registerController(Index);

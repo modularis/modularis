@@ -1,13 +1,15 @@
 class App {
-  init(Controller) {
-    const $controllerRoot = document.querySelector('body');
-    this.controller = new Controller($controllerRoot);
-
+  constructor() {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/service-worker.js', {
         scope: '/'
       });
     }
+  }
+
+  registerController(Controller) {
+    const $controllerRoot = document.querySelector('body');
+    this.controller = new Controller($controllerRoot);
   }
 }
 
