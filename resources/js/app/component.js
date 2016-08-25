@@ -28,7 +28,5 @@ export default class Component {
     this.registerComponents();
   }
 
-  registerComponents() {
-    return Promise.resolve();
-  }
+  registerComponents() {}
 }
