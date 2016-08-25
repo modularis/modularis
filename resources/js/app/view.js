@@ -1,27 +1,33 @@
-// @TODO: only load templates if not already loaded or cached
-// @TODO: cache templates
+// @TODO: only load templates if not already loaded
 import Handlebars from 'handlebars/runtime';
 
+import app from '../app/app.js';
+
 export default class View {
-  constructor($el) {
+  constructor($el, templatePath) {
     this.el = $el;
-    this.template = null;
+    this.templatePath = templatePath;
   }
 
-  loadTemplate(templatePath) {
+  loadTemplate() {
     return new Promise((promiseResolve) => {
-      const request = new Request(`/view-loader/${templatePath.split('/').join('.')}`);
-      fetch(request)
-        .then((response) => {
-          response.text().then(template => {
-            const compile = new Function(`return ${template}`); // eslint-disable-line no-new-func
-            this.template = Handlebars.template(compile());
-            Handlebars.registerPartial(templatePath, this.template);
-            promiseResolve(true);
+      if (app.templates[this.templatePath]) {
+        promiseResolve(true);
+      } else {
+        app.templates[this.templatePath] = 'test';
+        const request = new Request(`/view-loader/${this.templatePath.split('/').join('.')}`);
+        fetch(request)
+          .then((response) => {
+            response.text().then(template => {
+              const compile = new Function(`return ${template}`); // eslint-disable-line no-new-func
+              app.templates[this.templatePath] = Handlebars.template(compile());
+              Handlebars.registerPartial(this.templatePath, app.templates[this.templatePath]);
+              promiseResolve(true);
+            });
+          }).catch((error) => {
+            console.log(error); // eslint-disable-line no-console
           });
-        }).catch((error) => {
-          console.log(error); // eslint-disable-line no-console
-        });
+      }
     });
   }
 
@@ -44,7 +50,7 @@ export default class View {
     const $parentNode = this.el.parentNode;
     if (!$parentNode) return false;
 
-    const markup = this.template(data);
+    const markup = app.templates[this.templatePath](data);
     const $elWrap = document.createElement('div');
     $elWrap.innerHTML = markup;
 

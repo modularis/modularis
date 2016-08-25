@@ -10,7 +10,7 @@ export default class Component {
 
     this.templatePath = templatePath;
     this.controller = controller;
-    this.view = new View($el);
+    this.view = new View($el, templatePath);
 
     // Component data.
     this.data = {};
