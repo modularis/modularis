@@ -9,6 +9,7 @@ export default class View {
     this.templatePath = templatePath;
   }
 
+  // @TODO: maybe load templates in the app?
   loadTemplate() {
     return new Promise((promiseResolve) => {
       if (app.templates[this.templatePath]) {
