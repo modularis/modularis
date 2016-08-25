@@ -6,7 +6,7 @@ import Card from '../../components/card/index.js';
 class Index extends Controller {
   registerComponents() {
     return new Promise((promiseResolve) => {
-      this.cmp.card = new Card(document.querySelector('.c-card'), this);
+      this.cmp.mainTeaser = new Card(document.querySelectorAll('.c-card'), this);
       promiseResolve(true);
     });
   }
