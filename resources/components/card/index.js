@@ -6,6 +6,7 @@ export default class Card extends Component {
   constructor($el, data = { partyMode: false }) {
     const templatePath = 'components/card/template';
 
+    // @TODO: this should be in the Component constructor.
     if ($el.length > 1) {
       return Array.from($el).map(($x) => new Card($x, JSON.parse(JSON.stringify(data))));
     }
