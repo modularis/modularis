@@ -4,24 +4,28 @@ import Handlebars from 'handlebars/runtime';
 import app from '../app/app.js';
 
 export default class View {
-  constructor($el, templatePath) {
-    this.el = $el;
-    this.templatePath = templatePath;
+  constructor(component) {
+    this.component = component;
   }
 
   // @TODO: maybe load templates in the app?
   loadTemplate() {
     return new Promise((promiseResolve) => {
-      if (app.templates[this.templatePath]) {
+      if (app.templates[this.component.templatePath]) {
         promiseResolve(true);
       } else {
-        const request = new Request(`/view-loader/${this.templatePath.split('/').join('.')}`);
+        const request = new Request(
+          `/view-loader/${this.component.templatePath.split('/').join('.')}`
+        );
         fetch(request)
           .then((response) => {
             response.text().then(template => {
               const compile = new Function(`return ${template}`); // eslint-disable-line no-new-func
-              app.templates[this.templatePath] = Handlebars.template(compile());
-              Handlebars.registerPartial(this.templatePath, app.templates[this.templatePath]);
+              app.templates[this.component.templatePath] = Handlebars.template(compile());
+              Handlebars.registerPartial(
+                this.component.templatePath,
+                app.templates[this.component.templatePath]
+              );
               promiseResolve(true);
             });
           }).catch((error) => {
@@ -47,17 +51,18 @@ export default class View {
   }
 
   render(data = {}) {
-    const $parentNode = this.el.parentNode;
+    const $parentNode = this.component.dom.el.parentNode;
     if (!$parentNode) return false;
 
-    const markup = app.templates[this.templatePath](data);
+    const markup = app.templates[this.component.templatePath](data);
     const $elWrap = document.createElement('div');
     $elWrap.innerHTML = markup;
 
     const $newEl = $elWrap.firstChild;
-    $parentNode.replaceChild($newEl, this.el);
+    $parentNode.replaceChild($newEl, this.component.dom.el);
 
-    this.el = $newEl;
+    this.component.dom.el = $newEl;
+    this.component.reboot();
     return $newEl;
   }
 }

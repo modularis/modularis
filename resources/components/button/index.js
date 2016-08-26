@@ -9,9 +9,7 @@ export default class Button extends Component {
     super($el, templatePath);
   }
 
-  boot() {
-    super();
-    // @TODO: bind events and stuff after render.
-    this.view.render({ title: 'Hallo Welt wie gehts' });
+  domEvents() {
+    this.dom.el.addEventListener('click', () => console.log('Party toggle button'));
   }
 }

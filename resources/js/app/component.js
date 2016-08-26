@@ -10,7 +10,6 @@ export default class Component {
 
     this.templatePath = templatePath;
     this.cmp = {};
-    this.view = new View($el, templatePath);
 
     // Component data.
     this.data = {};
@@ -18,6 +17,8 @@ export default class Component {
     this.dom = {
       el: $el
     };
+
+    this.view = new View(this);
 
     return this.init();
   }
@@ -56,6 +57,13 @@ export default class Component {
   }
 
   boot() {
+    this.domBindings();
+    this.domEvents();
+  }
+
+  reboot() {
+    this.registerComponents();
+    this.triggerBoot();
     this.domBindings();
     this.domEvents();
   }

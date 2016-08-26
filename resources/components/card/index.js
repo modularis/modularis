@@ -9,6 +9,8 @@ export default class Card extends Component {
       return Array.from($el).map(($x) => new Card($x));
     }
     super($el, templatePath);
+
+    this.partyMode = false;
   }
 
   registerComponents() {
@@ -17,13 +19,17 @@ export default class Card extends Component {
     };
   }
 
-  boot() {
+  domEvents() {
+    this.cmp.mainButton.dom.el.addEventListener('click', () => this.partyModeToggle());
+  }
+
+  partyModeToggle() {
+    this.partyMode = !this.partyMode;
     this.view.render({
-      title: 'Hallo Welt wie gehts??',
+      title: (this.partyMode ? 'PARTY!!' : 'No party.'),
       button: {
         title: 'Drück mich!'
       }
     });
-    super();
   }
 }
