@@ -5,7 +5,7 @@ export default class Button extends Component {
     const templatePath = 'components/button/template';
 
     if ($el.length > 1) {
-      return Array.from($el).map(($x) => new Button($x, data));
+      return Array.from($el).map(($x) => new Button($x, JSON.parse(JSON.stringify(data))));
     }
 
     super($el, templatePath, data);

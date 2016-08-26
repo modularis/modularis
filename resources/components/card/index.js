@@ -7,7 +7,7 @@ export default class Card extends Component {
     const templatePath = 'components/card/template';
 
     if ($el.length > 1) {
-      return Array.from($el).map(($x) => new Card($x, data));
+      return Array.from($el).map(($x) => new Card($x, JSON.parse(JSON.stringify(data))));
     }
 
     super($el, templatePath, data);
@@ -33,7 +33,7 @@ export default class Card extends Component {
     this.view.render({
       title: (this.data.partyMode ? 'PARTY!!' : 'No party.'),
       button: {
-        title: 'Drück mich!'
+        title: (this.data.partyMode ? 'Party down.' : 'Party up!')
       }
     });
   }
