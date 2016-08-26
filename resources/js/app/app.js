@@ -10,11 +10,7 @@ class App {
   }
 
   registerController(Controller) {
-    return new Promise((promiseResolve) => {
-      const $controllerRoot = document.querySelector('body');
-      this.controller = new Controller($controllerRoot);
-      promiseResolve();
-    });
+    this.controller = new Controller(document.querySelector('body'));
   }
 }
 

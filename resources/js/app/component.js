@@ -55,5 +55,12 @@ export default class Component {
     });
   }
 
-  boot() {}
+  boot() {
+    this.domBindings();
+    this.domEvents();
+  }
+
+  domBindings() {}
+
+  domEvents() {}
 }

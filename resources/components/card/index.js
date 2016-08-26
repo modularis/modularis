@@ -24,5 +24,6 @@ export default class Card extends Component {
         title: 'Drück mich!'
       }
     });
+    super();
   }
 }

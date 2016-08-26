@@ -10,6 +10,7 @@ export default class Button extends Component {
   }
 
   boot() {
+    super();
     // @TODO: bind events and stuff after render.
     this.view.render({ title: 'Hallo Welt wie gehts' });
   }
