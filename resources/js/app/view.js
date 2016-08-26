@@ -50,6 +50,7 @@ export default class View {
     });
   }
 
+  // @TODO: use component data.
   render(data = {}) {
     const $parentNode = this.component.dom.el.parentNode;
     if (!$parentNode) return false;
