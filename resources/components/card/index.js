@@ -13,7 +13,7 @@ export default class Card extends Component {
 
   registerComponents() {
     this.cmp = {
-      mainButton: new Button(document.querySelector('.c-button'))
+      mainButton: new Button(this.dom.el.querySelector('.c-button'))
     };
   }
 

@@ -55,7 +55,6 @@ export default class View {
     $elWrap.innerHTML = markup;
 
     const $newEl = $elWrap.firstChild;
-
     $parentNode.replaceChild($newEl, this.el);
 
     this.el = $newEl;
