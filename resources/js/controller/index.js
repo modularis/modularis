@@ -5,10 +5,14 @@ import Card from '../../components/card/index.js';
 
 class Index extends Controller {
   registerComponents() {
-    return new Promise((promiseResolve) => {
-      this.cmp.mainTeaser = new Card(document.querySelectorAll('.c-card'), this);
-      promiseResolve(true);
-    });
+    this.cmp = {
+      mainTeaser: new Card(document.querySelectorAll('.c-card'))
+    };
+  }
+
+  boot() {
+    // @TODO: trigger boot of the controller.
+    console.log('test');
   }
 }
 

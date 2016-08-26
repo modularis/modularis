@@ -3,18 +3,18 @@ import Component from '../../js/app/component.js';
 import Button from '../button/index.js';
 
 export default class Card extends Component {
-  constructor($el, controller = null) {
+  constructor($el) {
     const templatePath = 'components/card/template';
     if ($el.length > 1) {
-      return Array.from($el).map(($x) => new Card($x, controller));
+      return Array.from($el).map(($x) => new Card($x));
     }
-    super($el, templatePath, controller);
-    return this;
+    super($el, templatePath);
   }
 
   registerComponents() {
-    // @TODO: this is overwritten erverytime card is instantiated.
-    this.controller.cmp.button = new Button(document.querySelector('.c-button'));
+    this.cmp = {
+      mainButton: new Button(document.querySelector('.c-button'))
+    };
   }
 
   boot() {

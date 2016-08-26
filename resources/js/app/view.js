@@ -15,7 +15,6 @@ export default class View {
       if (app.templates[this.templatePath]) {
         promiseResolve(true);
       } else {
-        app.templates[this.templatePath] = 'test';
         const request = new Request(`/view-loader/${this.templatePath.split('/').join('.')}`);
         fetch(request)
           .then((response) => {

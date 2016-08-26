@@ -1,13 +1,12 @@
 import Component from '../../js/app/component.js';
 
 export default class Button extends Component {
-  constructor($el, controller = null) {
+  constructor($el) {
     const templatePath = 'components/button/template';
     if ($el.length > 1) {
-      return Array.from($el).map(($x) => new Button($x, controller));
+      return Array.from($el).map(($x) => new Button($x));
     }
-    super($el, templatePath, controller);
-    return this;
+    super($el, templatePath);
   }
 
   boot() {
