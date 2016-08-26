@@ -1,15 +1,22 @@
 import Component from '../../js/app/component.js';
 
 export default class Button extends Component {
-  constructor($el) {
+  constructor($el, data = { partyMode: false }) {
     const templatePath = 'components/button/template';
+
     if ($el.length > 1) {
-      return Array.from($el).map(($x) => new Button($x));
+      return Array.from($el).map(($x) => new Button($x, data));
     }
-    super($el, templatePath);
+
+    super($el, templatePath, data);
   }
 
   domEvents() {
-    this.dom.el.addEventListener('click', () => console.log('Party toggle button'));
+    this.dom.el.addEventListener('click', () => this.partyModeToggle());
+  }
+
+  partyModeToggle() {
+    console.log(this.data.partyMode);
+    this.data.partyMode = !this.data.partyMode;
   }
 }
