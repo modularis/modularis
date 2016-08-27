@@ -19,7 +19,7 @@ export default class Component {
 
     this.view = new View(this);
 
-    return this.init();
+    this.init();
   }
 
   init() {
