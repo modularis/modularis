@@ -3,7 +3,7 @@ import Component from '../../js/app/component.js';
 import Button from '../button/index.js';
 
 export default class Card extends Component {
-  constructor($el, data = { partyMode: false }) {
+  constructor($el, data = {}) {
     const templatePath = 'components/card/template';
 
     // @TODO: this should be in the Component constructor.
@@ -12,6 +12,14 @@ export default class Card extends Component {
     }
 
     super($el, templatePath, data);
+
+    this.data = Object.assign({}, data, {
+      title: 'Test',
+      button: {
+        title: 'Test Button'
+      },
+      partyMode: false
+    });
   }
 
   registerComponents() {

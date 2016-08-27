@@ -52,10 +52,11 @@ export default class View {
 
   // @TODO: use component data.
   render(data = {}) {
+    const renderData = Object.assign({}, this.component.data, data);
     const $parentNode = this.component.dom.el.parentNode;
     if (!$parentNode) return false;
 
-    const markup = app.templates[this.component.templatePath](data);
+    const markup = app.templates[this.component.templatePath](renderData);
     const $elWrap = document.createElement('div');
     $elWrap.innerHTML = markup;
 
