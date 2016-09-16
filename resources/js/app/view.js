@@ -10,11 +10,14 @@ export default class View {
   }
 
   // @TODO: maybe load templates in the app?
+  // @TODO: refactor this mess!!!!!!
   loadTemplate() {
     return new Promise((promiseResolve) => {
       if (app.templates[this.component.templatePath]) {
         promiseResolve(true);
       } else {
+        // Set the template temporary to prevent loading it again.
+        app.templates[this.component.templatePath] = 'loading';
         const request = new Request(
           `/view-loader/${this.component.templatePath.split('/').join('.')}`
         );
@@ -27,6 +30,7 @@ export default class View {
                 this.component.templatePath,
                 app.templates[this.component.templatePath]
               );
+
               promiseResolve(true);
             });
           }).catch((error) => {
