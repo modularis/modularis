@@ -10,8 +10,22 @@ class Index extends Controller {
     });
   }
 
+  // domBindings() {
+  //   this.dom.header = this.dom.el.querySelector('h1');
+  // }
+
   // domEvents() {
-  //   this.dom.el.addEventListener('click', () => this.view.render({ header: 'modularis' }));
+  //   this.dom.header.addEventListener('click', () => this.view.loadData('/')
+  //     .then(data => {
+  //       data = JSON.parse(data);
+  //       data['header'] = 'modularis reloaded!!111';
+  //       this.render(data);
+  //     }));
+  // }
+
+  // render(data = {}) {
+  //   console.log(data);
+  //   this.view.render(data);
   // }
 }
 
