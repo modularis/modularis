@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "handlebars": "^4.0.5",
-    "set-dom": "^1.2.1"
+    "set-dom": "^1.2.1",
+    "xhr": "^2.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

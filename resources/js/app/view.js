@@ -1,6 +1,7 @@
 // @TODO: only load templates if not already loaded
 import Handlebars from 'handlebars/runtime';
 import setDOM from 'set-dom';
+import xhr from 'xhr';
 
 import app from '../app/app.js';
 
@@ -18,24 +19,21 @@ export default class View {
       } else {
         // Set the template temporary to prevent loading it again.
         app.templates[this.component.templatePath] = 'loading';
-        const request = new Request(
-          `/view-loader/${this.component.templatePath.split('/').join('.')}`
-        );
-        fetch(request)
-          .then((response) => {
-            response.text().then(template => {
-              const compile = new Function(`return ${template}`); // eslint-disable-line no-new-func
-              app.templates[this.component.templatePath] = Handlebars.template(compile());
-              Handlebars.registerPartial(
-                this.component.templatePath,
-                app.templates[this.component.templatePath]
-              );
-
-              promiseResolve(true);
-            });
-          }).catch((error) => {
-            console.log(error); // eslint-disable-line no-console
-          });
+        xhr({
+          uri: `/view-loader/${this.component.templatePath.split('/').join('.')}`
+        }, (error, response) => {
+          if (error) {
+            throw new Error(error);
+          }
+          // eslint-disable-next-line no-new-func
+          const compile = new Function(`return ${response.body}`);
+          app.templates[this.component.templatePath] = Handlebars.template(compile());
+          Handlebars.registerPartial(
+            this.component.templatePath,
+            app.templates[this.component.templatePath]
+          );
+          promiseResolve(true);
+        });
       }
     });
   }
