@@ -1,7 +1,7 @@
 class App {
   constructor() {
     this.templates = {};
-    this.registerServiceWorker();
+    // this.registerServiceWorker();
   }
 
   registerController(Controller) {
