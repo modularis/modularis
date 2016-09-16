@@ -1,7 +1,6 @@
-import Handlebars from 'handlebars/runtime';
-import setDOM from 'set-dom';
-import xhr from 'xhr';
-
+/* global Handlebars */
+/* global setDOM */
+/* global xhr */
 import app from '../app/app.js';
 
 export default class View {
