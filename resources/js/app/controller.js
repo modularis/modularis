@@ -1,4 +1,10 @@
 import Component from '../../js/app/component.js';
 
-// @TODO: load template of the controller and trigger boot.
-export default class Controller extends Component {}
+export default class Controller extends Component {
+  constructor($el, templatePath, data = {}) {
+    super($el, templatePath, data);
+    Object.assign(this.cmp, {
+      controller: this
+    });
+  }
+}

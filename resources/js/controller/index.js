@@ -5,15 +5,14 @@ import Card from '../../components/card/index.js';
 
 class Index extends Controller {
   registerComponents() {
-    this.cmp = {
+    Object.assign(this.cmp, {
       mainTeaser: new Card(document.querySelectorAll('.c-card'))
-    };
+    });
   }
 
-  boot() {
-    // @TODO: trigger boot of the controller.
-    console.log('test');
-  }
+  // domEvents() {
+  //   this.dom.el.addEventListener('click', () => this.view.render({ header: 'modularis' }));
+  // }
 }
 
 app.registerController(Index);

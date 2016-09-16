@@ -28,9 +28,9 @@ export default class Card extends Component {
     if (this.cmp.mainButton) {
       mainButtonData = this.cmp.mainButton.data;
     }
-    this.cmp = {
+    Object.assign(this.cmp, {
       mainButton: new Button(this.dom.el.querySelector('.c-button'), mainButtonData)
-    };
+    });
   }
 
   domEvents() {

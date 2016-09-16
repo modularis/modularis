@@ -1,13 +1,15 @@
-<header class="qa-header">
-  <h1>modularis</h1>
-</header>
-<main class="qa-main">
-  <p>Hello world!</p>
-  {{> components/card/template }}
-  {{> components/card/template }}
-  {{> components/card/template }}
-</main>
-<footer class="qa-footer">
-  &copy; modularis
-</footer>
-<script src="js/index.js" async></script>
+<div class="controller">
+  <header class="qa-header">
+    <h1>{{ header }}</h1>
+  </header>
+  <main class="qa-main">
+    <p>Hello world!</p>
+    {{> components/card/template }}
+    {{> components/card/template }}
+    {{> components/card/template }}
+  </main>
+  <footer class="qa-footer">
+    &copy; modularis
+  </footer>
+  <script src="js/index.js" async></script>
+</div>
