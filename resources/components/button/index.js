@@ -17,7 +17,6 @@ export default class Button extends Component {
   }
 
   partyModeToggle() {
-    console.log(this.data.partyMode);
     this.data.partyMode = !this.data.partyMode;
   }
 }
