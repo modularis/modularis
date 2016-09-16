@@ -11,30 +11,29 @@ export default class View {
   }
 
   // @TODO: maybe load templates in the app?
-  // @TODO: refactor this mess!!!!!!
   loadTemplate() {
     return new Promise((promiseResolve) => {
       if (app.templates[this.component.templatePath]) {
         promiseResolve(true);
-      } else {
-        // Set the template temporary to prevent loading it again.
-        app.templates[this.component.templatePath] = 'loading';
-        xhr({
-          uri: `/view-loader/${this.component.templatePath.split('/').join('.')}`
-        }, (error, response) => {
-          if (error) {
-            throw new Error(error);
-          }
-          // eslint-disable-next-line no-new-func
-          const compile = new Function(`return ${response.body}`);
-          app.templates[this.component.templatePath] = Handlebars.template(compile());
-          Handlebars.registerPartial(
-            this.component.templatePath,
-            app.templates[this.component.templatePath]
-          );
-          promiseResolve(true);
-        });
+        return;
       }
+      // Set the template temporary to prevent loading it again.
+      app.templates[this.component.templatePath] = 'loading';
+      xhr({
+        uri: `/view-loader/${this.component.templatePath.split('/').join('.')}`
+      }, (error, response) => {
+        if (error) {
+          throw new Error(error);
+        }
+        // eslint-disable-next-line no-new-func
+        const compile = new Function(`return ${response.body}`);
+        app.templates[this.component.templatePath] = Handlebars.template(compile());
+        Handlebars.registerPartial(
+          this.component.templatePath,
+          app.templates[this.component.templatePath]
+        );
+        promiseResolve(true);
+      });
     });
   }
 
