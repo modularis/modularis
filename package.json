@@ -20,7 +20,8 @@
     "url": "https://github.com/modularis/modularis/issues"
   },
   "dependencies": {
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.0.5",
+    "set-dom": "^1.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

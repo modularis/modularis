@@ -60,13 +60,6 @@ export default class Component {
     this.domEvents();
   }
 
-  reboot() {
-    this.registerComponents();
-    this.triggerBoot();
-    this.domBindings();
-    this.domEvents();
-  }
-
   domBindings() {}
 
   domEvents() {}

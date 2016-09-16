@@ -1,5 +1,6 @@
 // @TODO: only load templates if not already loaded
 import Handlebars from 'handlebars/runtime';
+import setDOM from 'set-dom';
 
 import app from '../app/app.js';
 
@@ -53,18 +54,8 @@ export default class View {
   // @TODO: use component data.
   render(data = {}) {
     const renderData = Object.assign({}, this.component.data, data);
-    const $parentNode = this.component.dom.el.parentNode;
-    if (!$parentNode) return false;
-
     const markup = app.templates[this.component.templatePath](renderData);
-    const $elWrap = document.createElement('div');
-    $elWrap.innerHTML = markup;
 
-    const $newEl = $elWrap.firstChild;
-    $parentNode.replaceChild($newEl, this.component.dom.el);
-
-    this.component.dom.el = $newEl;
-    this.component.reboot();
-    return $newEl;
+    setDOM(this.component.dom.el, markup);
   }
 }
