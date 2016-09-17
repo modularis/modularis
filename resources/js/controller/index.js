@@ -16,6 +16,7 @@ class Index extends Controller {
   }
 
   ready() {
+    document.querySelector('.controller').addEventListener('click', () => console.log('hihi'));
     document.querySelector('.product-link').addEventListener('click', (e) => {
       e.preventDefault();
       app.switchPage('/product/xy', 'product-page');

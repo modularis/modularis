@@ -64,13 +64,19 @@ class App {
   }
 
   switchPage(uri, templateName) {
-    xhr({
-      uri
-    }, (error, response) => {
+    xhr({ uri }, (error, response) => {
       if (error) {
         throw new Error(error);
       }
-      setDOM(document.querySelector('html'), response.body);
+      // Wipe the <body> and replace with new content to get rid of dom events
+      // and other stuff the previous controller may added.
+      const $wrapper = document.implementation.createHTMLDocument().documentElement;
+      $wrapper.innerHTML = response.body;
+      const $controller = document.querySelector('.controller');
+      const $newController = $wrapper.querySelector('.controller');
+      const $parentNode = $controller.parentNode;
+      $parentNode.replaceChild($newController, $controller);
+      // Reload the controller script.
       document.querySelector('#controller-script').remove();
       const controllerScript = document.createElement('script');
       controllerScript.src = `/js/${templateName}.js`;
