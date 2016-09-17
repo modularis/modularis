@@ -1,3 +1,4 @@
+const compression = require('compression');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
@@ -6,6 +7,8 @@ const IndexController = require('./controller/IndexController.js');
 const ViewLoader = require('./lib/ViewLoader.js');
 
 const app = express();
+app.use(compression());
+app.use(express.static('public'));
 
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
@@ -16,8 +19,6 @@ app.engine('.hbs', exphbs({
 
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, '../resources/views'));
-
-app.use(express.static('public'));
 
 app.get('/', (request, response) => {
   const indexController = new IndexController(request, response);

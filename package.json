@@ -31,6 +31,7 @@
     "chai": "^3.5.0",
     "chokidar-cli": "^1.2.0",
     "clean-css": "^3.4.19",
+    "compression": "^1.6.2",
     "eslint": "^3.2.2",
     "eslint-config-modularis": "^0.1.0",
     "eslint-plugin-import": "^1.12.0",
