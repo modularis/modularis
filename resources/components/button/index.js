@@ -11,12 +11,4 @@ export default class Button extends Component {
 
     super($el, templatePath, data);
   }
-
-  domEvents() {
-    this.dom.el.addEventListener('click', () => this.partyModeToggle());
-  }
-
-  partyModeToggle() {
-    this.data.partyMode = !this.data.partyMode;
-  }
 }

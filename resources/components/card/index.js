@@ -12,19 +12,11 @@ export default class Card extends Component {
     }
 
     super($el, templatePath, data);
-
-    this.data = Object.assign({}, data, {
-      title: 'Test',
-      button: {
-        title: 'Test Button'
-      },
-      partyMode: false
-    });
   }
 
   registerComponents() {
     // @TODO: it shouldnt be that hard, should be automized.
-    let mainButtonData;
+    let mainButtonData = this.data.button;
     if (this.cmp.mainButton) {
       mainButtonData = this.cmp.mainButton.data;
     }
@@ -38,12 +30,12 @@ export default class Card extends Component {
   }
 
   partyModeToggle() {
-    this.data.partyMode = !this.data.partyMode;
-    this.view.render({
+    this.updateData({
+      partyMode: !this.data.partyMode,
       title: (this.data.partyMode ? 'PARTY!!' : 'No party.'),
       button: {
         title: (this.data.partyMode ? 'Party down.' : 'Party up!')
       }
-    });
+    }, true);
   }
 }

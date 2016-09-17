@@ -4,8 +4,14 @@ class App {
     // this.registerServiceWorker();
   }
 
-  registerController(Controller) {
-    this.controller = new Controller(document.querySelector('.controller'), 'views/index');
+  registerController(Controller, endpoint) {
+    this.controller = new Controller(
+      document.querySelector('.controller'),
+      'views/index',
+      // TODO: empty data ???
+      {},
+      endpoint
+    );
   }
 
   registerServiceWorker() {

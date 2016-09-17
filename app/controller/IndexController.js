@@ -9,7 +9,8 @@ module.exports = class IndexController {
       header: 'modularis',
       card: {
         title: 'Test',
-        button: { title: 'Test Button' }
+        button: { title: 'Test Button' },
+        partyMode: false
       }
     };
     if (this.request.headers.accept && this.request.headers.accept.indexOf('json') > -1) {
