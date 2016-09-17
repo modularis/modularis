@@ -1,17 +1,18 @@
-module.exports = class IndexController {
+module.exports = class ProductController {
   constructor(request, response) {
     this.request = request;
     this.response = response;
   }
 
-  index() {
-    const templateName = 'index';
+  page() {
+    const templateName = 'product-page';
     const data = {
-      header: 'modularis',
-      card: {
-        title: 'Test',
-        button: { title: 'Test Button' },
-        partyMode: false
+      header: 'Product XY',
+      body: 'Lorem Ipsum dolor sit',
+      image: 'img/product.jpg',
+      details: {
+        weight: '20kg',
+        price: '300 €'
       },
       templateName
     };

@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 
 const IndexController = require('./controller/IndexController.js');
+const ProductController = require('./controller/ProductController.js');
 const ViewLoader = require('./lib/ViewLoader.js');
 
 const app = express();
@@ -23,6 +24,11 @@ app.set('views', path.join(__dirname, '../resources/views'));
 app.get('/', (request, response) => {
   const indexController = new IndexController(request, response);
   indexController.index();
+});
+
+app.get('/product/xy', (request, response) => {
+  const productController = new ProductController(request, response);
+  productController.page();
 });
 
 app.get('/view-loader/:view', (request, response) => {
