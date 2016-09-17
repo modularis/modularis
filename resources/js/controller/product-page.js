@@ -6,10 +6,6 @@ class Product extends Controller {
     Object.assign(this.cmp, {
     });
   }
-
-  ready() {
-    console.log('test');
-  }
 }
 
-app.registerController(Product, '/');
+app.registerController(Product, '/product/xy', 'views.product-page');

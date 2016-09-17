@@ -8,10 +8,10 @@ class App {
     // this.registerServiceWorker();
   }
 
-  registerController(Controller, endpoint) {
+  registerController(Controller, endpoint, templatePath) {
     this.controller = new Controller(
       document.querySelector('.controller'),
-      'views/index',
+      templatePath,
       // TODO: empty data ???
       {},
       endpoint
@@ -69,9 +69,23 @@ class App {
     });
   }
 
-  render($el, templatePath, data = {}) {
+  // switchPage(uri, templatePath) {
+  // }
+
+  render($el, templatePath, data = {}, domPatching = true) {
     const markup = this.templates[templatePath](data);
-    setDOM($el, markup);
+    if (domPatching) {
+      setDOM($el, markup);
+      return;
+    }
+    const $wrap = document.createElement('div');
+    $wrap.innerHTML = markup;
+    const $newNode = $wrap.firstChild;
+    const $parentNode = $el.parentNode;
+
+    if (!$parentNode) return;
+
+    $parentNode.replaceChild($newNode, $el);
   }
 }
 

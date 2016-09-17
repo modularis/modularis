@@ -16,4 +16,4 @@ class Index extends Controller {
   }
 }
 
-app.registerController(Index, '/');
+app.registerController(Index, '/', 'views.index');
