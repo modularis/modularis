@@ -8,14 +8,8 @@ class App {
     // this.registerServiceWorker();
   }
 
-  registerController(Controller, endpoint, templatePath) {
-    this.controller = new Controller(
-      document.querySelector('.controller'),
-      templatePath,
-      // TODO: empty data ???
-      {},
-      endpoint
-    );
+  registerController(Controller) {
+    this.controller = new Controller();
   }
 
   registerServiceWorker() {

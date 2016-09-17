@@ -7,39 +7,40 @@ export default class Component {
       throw new Error(`${this.constructor.name} has no DOM $el`);
     }
 
-    this.templatePath = templatePath;
-    this.data = data;
-    this.endpoint = endpoint;
-    this.cmp = {};
-
     // Dom bindings.
     this.dom = {
       el: $el
     };
 
-    this.init();
+    this.templatePath = templatePath;
+    this.data = data;
+    this.endpoint = endpoint;
+
+    // Components.
+    this.cmp = {
+      self: this
+    };
+
+    this.init().then(() => this.boot());
   }
 
   init() {
-    this.registerComponents();
     return Promise.all([
-      this.registerTemplates(),
-      this.hydrate()
-    ]).then(() => this.triggerBoot());
+      this.registerComponents(),
+      this.registerTemplate(),
+      this.registerData()
+    ]);
   }
 
-  registerComponents() {}
-
-  registerTemplates() {
-    const templatePromises = [];
-    Object.keys(this.cmp).forEach((cmpName) => {
-      const component = this.cmp[cmpName][0] || this.cmp[cmpName];
-      templatePromises.push(app.loadTemplate(component.templatePath));
-    });
-    return Promise.all(templatePromises);
+  registerComponents() {
+    return Promise.resolve();
   }
 
-  hydrate() {
+  registerTemplate() {
+    return app.loadTemplate(this.templatePath);
+  }
+
+  registerData() {
     return new Promise((promiseResolve) => {
       if (!this.endpoint) {
         promiseResolve(true);
@@ -49,16 +50,6 @@ export default class Component {
         this.updateData(data);
         promiseResolve(true);
       });
-    });
-  }
-
-  triggerBoot() {
-    Object.keys(this.cmp).forEach(cmpName => {
-      if (typeof this.cmp[cmpName].boot === 'function') {
-        this.cmp[cmpName].boot();
-      } else {
-        this.cmp[cmpName].forEach((component) => component.boot());
-      }
     });
   }
 

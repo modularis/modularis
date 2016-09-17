@@ -4,6 +4,10 @@ import Controller from '../app/controller.js';
 import Card from '../../components/card/index.js';
 
 class Index extends Controller {
+  constructor() {
+    super(document.querySelector('.controller'), 'views/index', {}, '/');
+  }
+
   registerComponents() {
     // TODO: Object assign not pretty api.
     Object.assign(this.cmp, {
@@ -16,4 +20,4 @@ class Index extends Controller {
   }
 }
 
-app.registerController(Index, '/', 'views.index');
+app.registerController(Index);
