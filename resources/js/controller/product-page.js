@@ -2,8 +2,19 @@ import app from '../app/app.js';
 import Controller from '../app/controller.js';
 
 class Product extends Controller {
+  constructor() {
+    super(document.querySelector('.controller'), 'views/product-page', {}, '/product/xy');
+  }
+
   registerComponents() {
     Object.assign(this.cmp, {
+    });
+  }
+
+  ready() {
+    document.querySelector('.index-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      app.switchPage('/', 'index');
     });
   }
 }

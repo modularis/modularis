@@ -63,23 +63,43 @@ class App {
     });
   }
 
-  // switchPage(uri, templatePath) {
-  // }
+  switchPage(uri, templateName) {
+    xhr({
+      uri
+    }, (error, response) => {
+      if (error) {
+        throw new Error(error);
+      }
+      setDOM(document.querySelector('html'), response.body);
+      document.querySelector('#controller-script').remove();
+      const controllerScript = document.createElement('script');
+      controllerScript.src = `/js/${templateName}.js`;
+      controllerScript.id = 'controller-script';
+      document.querySelector('body').appendChild(controllerScript);
+
+      // Completely reload;
+      // document.open();
+      // document.write(response.body);
+      // document.close();
+    });
+  }
 
   render($el, templatePath, data = {}, domPatching = true) {
     const markup = this.templates[templatePath](data);
     if (domPatching) {
       setDOM($el, markup);
-      return;
+      return $el;
     }
     const $wrap = document.createElement('div');
     $wrap.innerHTML = markup;
     const $newNode = $wrap.firstChild;
     const $parentNode = $el.parentNode;
 
-    if (!$parentNode) return;
+    if (!$parentNode) return false;
 
     $parentNode.replaceChild($newNode, $el);
+
+    return $newNode;
   }
 }
 

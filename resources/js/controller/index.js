@@ -16,6 +16,10 @@ class Index extends Controller {
   }
 
   ready() {
+    document.querySelector('.product-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      app.switchPage('/product/xy', 'product-page');
+    });
     this.cmp.mainTeasers.forEach((mainTeaser) => mainTeaser.updateData(this.data.card));
   }
 }
