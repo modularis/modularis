@@ -1,6 +1,3 @@
-/* global Handlebars */
-/* global setDOM */
-/* global xhr */
 import app from '../app/app.js';
 
 export default class Component {
@@ -37,7 +34,7 @@ export default class Component {
     const templatePromises = [];
     Object.keys(this.cmp).forEach((cmpName) => {
       const component = this.cmp[cmpName][0] || this.cmp[cmpName];
-      templatePromises.push(component.loadTemplate());
+      templatePromises.push(app.loadTemplate(component.templatePath));
     });
     return Promise.all(templatePromises);
   }
@@ -48,7 +45,7 @@ export default class Component {
         promiseResolve(true);
         return;
       }
-      this.loadData().then(data => {
+      app.loadData(this.endpoint).then(data => {
         this.updateData(data);
         promiseResolve(true);
       });
@@ -77,49 +74,6 @@ export default class Component {
 
   ready() {}
 
-  loadData() {
-    return new Promise((promiseResolve) => {
-      xhr({
-        uri: this.endpoint,
-        headers: {
-          Accept: 'json'
-        }
-      }, (error, response) => {
-        if (error) {
-          throw new Error(error);
-        }
-        promiseResolve(JSON.parse(response.body));
-      });
-    });
-  }
-
-  loadTemplate() {
-    return new Promise((promiseResolve) => {
-      if (app.templates[this.templatePath]) {
-        promiseResolve(true);
-        return;
-      }
-      app.templates[this.templatePath] = 'loading';
-      // Set the template temporary to prevent loading it again.
-      xhr({
-        uri: `/view-loader/${this.templatePath.split('/').join('.')}`
-      }, (error, response) => {
-        if (error) {
-          throw new Error(error);
-        }
-        // eslint-disable-next-line no-new-func
-        const compile = new Function(`return ${response.body}`);
-        const compiledTemplate = Handlebars.template(compile());
-        Handlebars.registerPartial(
-          this.templatePath,
-          compiledTemplate
-        );
-        app.templates[this.templatePath] = compiledTemplate;
-        promiseResolve(true);
-      });
-    });
-  }
-
   updateData(data = {}, render = false) {
     // TODO: should update global state??
     // e.g. card changes state - should change global state or should it not?!?!
@@ -130,8 +84,6 @@ export default class Component {
   }
 
   render(data = {}) {
-    const renderData = Object.assign({}, this.data, data);
-    const markup = app.templates[this.templatePath](renderData);
-    setDOM(this.dom.el, markup);
+    app.render(this.dom.el, this.templatePath, Object.assign({}, this.data, data));
   }
 }
