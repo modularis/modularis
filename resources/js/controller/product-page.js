@@ -15,7 +15,7 @@ class Product extends Controller {
     document.querySelector('.controller').addEventListener('click', () => console.log('hoho'));
     document.querySelector('.index-link').addEventListener('click', (e) => {
       e.preventDefault();
-      app.switchPage('/', 'index');
+      app.switchPage('/');
     });
   }
 }

@@ -19,7 +19,7 @@ class Index extends Controller {
     document.querySelector('.controller').addEventListener('click', () => console.log('hihi'));
     document.querySelector('.product-link').addEventListener('click', (e) => {
       e.preventDefault();
-      app.switchPage('/product/xy', 'product-page');
+      app.switchPage('/product/xy');
     });
     this.cmp.mainTeasers.forEach((mainTeaser) => mainTeaser.updateData(this.data.card));
   }

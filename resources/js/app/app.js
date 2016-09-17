@@ -6,6 +6,7 @@ class App {
   constructor() {
     this.templates = {};
     // this.registerServiceWorker();
+    window.onpopstate = (e) => this.switchPage(e.state.uri, false);
   }
 
   registerController(Controller) {
@@ -63,30 +64,40 @@ class App {
     });
   }
 
-  switchPage(uri, templateName) {
+  switchPage(uri, setHistory = true) {
     xhr({ uri }, (error, response) => {
       if (error) {
         throw new Error(error);
       }
       // Wipe the <body> and replace with new content to get rid of dom events
       // and other stuff the previous controller may added.
-      const $wrapper = document.implementation.createHTMLDocument().documentElement;
-      $wrapper.innerHTML = response.body;
-      const $controller = document.querySelector('.controller');
-      const $newController = $wrapper.querySelector('.controller');
-      const $parentNode = $controller.parentNode;
-      $parentNode.replaceChild($newController, $controller);
-      // Reload the controller script.
-      document.querySelector('#controller-script').remove();
-      const controllerScript = document.createElement('script');
-      controllerScript.src = `/js/${templateName}.js`;
-      controllerScript.id = 'controller-script';
-      document.querySelector('body').appendChild(controllerScript);
+      // const $wrapper = document.implementation.createHTMLDocument().documentElement;
+      // $wrapper.innerHTML = response.body;
+      // const $body = $wrapper.querySelector('body');
+      // const $controller = document.querySelector('.controller');
+      // const $newController = $body.querySelector('.controller');
+      // const $parentNode = $controller.parentNode;
+      // $parentNode.replaceChild($newController, $controller);
+      // // Reload the controller script.
+      // const $oldControllerScript = $body.querySelector('#controller-script');
+      // const scriptSrc = $oldControllerScript.src;
+      // console.log($oldControllerScript);
+      // $oldControllerScript.remove();
+      // const controllerScript = document.createElement('script');
+      // controllerScript.src = scriptSrc;
+      // controllerScript.id = 'controller-script';
+      // document.querySelector('body').appendChild(controllerScript);
+
+      // history.pushState({ uri }, $controller.querySelector('h1').text, uri);
 
       // Completely reload;
-      // document.open();
-      // document.write(response.body);
-      // document.close();
+      document.open();
+      document.write(response.body);
+      document.close();
+
+      if (setHistory) {
+        history.pushState({ uri }, document.title, uri);
+      }
     });
   }
 
