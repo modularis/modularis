@@ -2,22 +2,20 @@ import app from '../app/app.js';
 import Controller from '../app/controller.js';
 
 class Product extends Controller {
-  constructor() {
-    super(document.querySelector('.controller'), 'views/product-page', {}, '/product/xy');
-  }
-
-  registerComponents() {
-    Object.assign(this.cmp, {
-    });
-  }
-
   ready() {
-    document.querySelector('.controller').addEventListener('click', () => console.log('hoho'));
-    document.querySelector('.index-link').addEventListener('click', (e) => {
+    this.dom.el.addEventListener('click', () => console.log('hoho'));
+    this.dom.el.querySelector('.index-link').addEventListener('click', (e) => {
       e.preventDefault();
-      app.switchPage('/');
+      app.switchPage('/', 'index');
     });
+  }
+
+  static register() {
+    return {
+      endpoint: '/product/xy',
+      templatePath: 'views/product-page'
+    };
   }
 }
 
-app.registerController(Product, '/product/xy', 'views.product-page');
+app.registerController(Product);

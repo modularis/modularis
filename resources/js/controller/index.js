@@ -4,16 +4,35 @@ import Controller from '../app/controller.js';
 import Card from '../../components/card/index.js';
 
 class Index extends Controller {
-  registerComponents() {
-    this.addComponent(Card, 'mainTeaser', { selector: '.c-card' });
+  initComponents() {
+    this.cmp.mainTeaser = [];
+    Array.from(this.dom.el.querySelectorAll('.js-cmp-card')).forEach((el) => {
+      this.cmp.mainTeaser.push(app.initComponent(Card, el));
+    });
   }
 
   dataBinding() {
-    this.cmp.mainTeaser.data = this.data.card;
+    this.cmp.mainTeaser.forEach((teaser) => teaser.updateData(this.data.card));
+  }
+
+  ready() {
+    this.dom.el.addEventListener('click', () => console.log('hihi'));
+    this.dom.el.querySelector('.product-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      app.switchPage('product/xy', 'product-page');
+    });
+  }
+
+  static register() {
+    return {
+      endpoint: '/',
+      templatePath: 'views/index'
+    };
+  }
+
+  static registerComponents() {
+    app.registerComponent(Card);
   }
 }
 
-app.registerController(Index, {
-  endpoint: '/',
-  templatePath: 'views/index'
-});
+app.registerController(Index);

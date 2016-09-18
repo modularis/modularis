@@ -1,12 +1,13 @@
 import app from '../app/app.js';
 
 export default class Component {
-  constructor(selector, data = {}, endpoint = null, templatePath = null) {
-    this.selector = selector;
+  constructor($el, data = {}, templatePath) {
     this.data = data;
-    this.endpoint = endpoint;
-    this.templatePath = templatePath ||
-      `components/${this.constructor.name.toLowerCase()}/template`;
+    this.templatePath = templatePath;
+
+    this.dom = {
+      el: $el
+    };
 
     this.cmp = {};
 
@@ -14,29 +15,10 @@ export default class Component {
   }
 
   init() {
-    this.registerComponents();
-    this.registerData();
-    this.registerTemplates();
+    this.initComponents();
   }
 
-  registerComponents() {}
-
-  registerData() {
-    if (this.endpoint) {
-      app.loadData(this.endpoint).then((data) => { this.data = data; });
-    }
-  }
-
-  registerTemplates() {
-    if (this.templatePath) {
-      app.loadTemplate(this.templatePath);
-    }
-  }
-
-  addComponent(ComponentClass, name, parameters) {
-    // @TODO maybe add warning if name already exists.
-    Object.assign(this.cmp, app.registerComponent(ComponentClass, name, parameters, this));
-  }
+  initComponents() {}
 
   boot() {
     this.dataBinding();
@@ -62,7 +44,18 @@ export default class Component {
     }
   }
 
-  render(data = {}) {
-    app.render(this.dom.el, this.templatePath, Object.assign({}, this.data, data));
+  render(data = {}, domPatching = true) {
+    return app.render(
+      this.dom.el,
+      this.templatePath,
+      Object.assign({}, this.data, data),
+      domPatching
+    );
   }
+
+  static register() {
+    return {};
+  }
+
+  static registerComponents() {}
 }

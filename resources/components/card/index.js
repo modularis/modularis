@@ -1,18 +1,19 @@
+import app from '../../js/app/app.js';
 import Component from '../../js/app/component.js';
 
 import Button from '../button/index.js';
 
 export default class Card extends Component {
-  registerComponents() {
-    this.addComponent(Button, 'mainButton', { selector: '.c-button' });
+  initComponents() {
+    this.cmp.button = app.initComponent(Button, this.dom.el.querySelector('.js-cmp-button'));
   }
 
   dataBinding() {
-    this.cmp.mainButton.data = this.data.button;
+    this.cmp.button.updateData(this.data.button);
   }
 
   domEvents() {
-    this.cmp.mainButton.dom.el.addEventListener('click', () => this.partyModeToggle());
+    this.cmp.button.dom.el.addEventListener('click', () => this.partyModeToggle());
   }
 
   partyModeToggle() {
@@ -23,5 +24,15 @@ export default class Card extends Component {
         title: (this.data.partyMode ? 'Party down.' : 'Party up!')
       }
     }, true);
+  }
+
+  static register() {
+    return {
+      templatePath: 'components/card/template'
+    };
+  }
+
+  static registerComponents() {
+    app.registerComponent(Button);
   }
 }
