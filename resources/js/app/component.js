@@ -7,6 +7,9 @@ export default class Component {
       throw new Error(`${this.constructor.name} has no DOM $el`);
     }
 
+    // this.templatePath = templatePath ||
+    // `components/${this.constructor.name.toLowerCase()}/template`;
+
     // Dom bindings.
     this.dom = {
       el: $el
