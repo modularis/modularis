@@ -1,66 +1,51 @@
 import app from '../app/app.js';
 
 export default class Component {
-  constructor($el, templatePath, data = {}, endpoint = null) {
-    // Validate dom element.
-    if (!$el || $el.length === 0) {
-      throw new Error(`${this.constructor.name} has no DOM $el`);
-    }
-
-    // this.templatePath = templatePath ||
-    // `components/${this.constructor.name.toLowerCase()}/template`;
-
-    // Dom bindings.
-    this.dom = {
-      el: $el
-    };
-
-    this.templatePath = templatePath;
+  constructor(selector, data = {}, endpoint = null, templatePath = null) {
+    this.selector = selector;
     this.data = data;
     this.endpoint = endpoint;
+    this.templatePath = templatePath ||
+      `components/${this.constructor.name.toLowerCase()}/template`;
 
-    // Components.
-    this.cmp = {
-      self: this
-    };
+    this.cmp = {};
 
-    this.init().then(() => this.boot());
+    this.init();
   }
 
   init() {
-    return Promise.all([
-      this.registerComponents(),
-      this.registerTemplate(),
-      this.registerData()
-    ]);
+    this.registerComponents();
+    this.registerData();
+    this.registerTemplates();
   }
 
-  registerComponents() {
-    return Promise.resolve();
-  }
-
-  registerTemplate() {
-    return app.loadTemplate(this.templatePath);
-  }
+  registerComponents() {}
 
   registerData() {
-    return new Promise((promiseResolve) => {
-      if (!this.endpoint) {
-        promiseResolve(true);
-        return;
-      }
-      app.loadData(this.endpoint).then(data => {
-        this.updateData(data);
-        promiseResolve(true);
-      });
-    });
+    if (this.endpoint) {
+      app.loadData(this.endpoint).then((data) => { this.data = data; });
+    }
+  }
+
+  registerTemplates() {
+    if (this.templatePath) {
+      app.loadTemplate(this.templatePath);
+    }
+  }
+
+  addComponent(ComponentClass, name, parameters) {
+    // @TODO maybe add warning if name already exists.
+    Object.assign(this.cmp, app.registerComponent(ComponentClass, name, parameters, this));
   }
 
   boot() {
+    this.dataBinding();
     this.domBindings();
     this.domEvents();
     this.ready();
   }
+
+  dataBinding() {}
 
   domBindings() {}
 

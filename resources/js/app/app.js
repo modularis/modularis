@@ -4,13 +4,11 @@
 
 class App {
   constructor() {
+    this.components = [];
     this.templates = {};
+    this.loaders = [];
     // this.registerServiceWorker();
     window.onpopstate = (e) => this.switchPage(e.state.uri, false);
-  }
-
-  registerController(Controller) {
-    this.controller = new Controller();
   }
 
   registerServiceWorker() {
@@ -21,8 +19,68 @@ class App {
     }
   }
 
+  registerController(Controller, parameters) {
+    const defaultParameters = {
+      selector: '.controller'
+    };
+    const controllerParameters = Object.assign({}, defaultParameters, parameters);
+    const controllerInstance = new Controller(
+      controllerParameters.selector,
+      controllerParameters.data,
+      controllerParameters.endpoint,
+      controllerParameters.templatePath
+    );
+    controllerInstance.dom = {
+      el: document.querySelector(controllerInstance.selector)
+    };
+    this.components.push(controllerInstance);
+    Promise.all(this.loaders).then(() => this.triggerBoot());
+    return controllerInstance;
+  }
+
+  registerComponent(ComponentClass, name, parameters, callerInstance) {
+    const defaultParameters = {
+    };
+    const componentParameters = Object.assign({}, defaultParameters, parameters);
+    const componentInstance = new ComponentClass(
+      componentParameters.selector,
+      componentParameters.data,
+      componentParameters.endpoint,
+      componentParameters.templatePath
+    );
+    componentInstance.callerInstance = callerInstance;
+    this.components.push(componentInstance);
+    const cmp = {};
+    cmp[name] = componentInstance;
+    return cmp;
+  }
+
+  triggerBoot() {
+    this.components.reverse().forEach((componentInstance) => {
+      if (componentInstance.callerInstance) {
+        const parent = componentInstance.callerInstance.dom.el;
+        componentInstance.dom = {
+          parent,
+          el: parent.querySelector(componentInstance.selector)
+        };
+      }
+    });
+    this.components.map((x) => x.boot());
+  }
+
+  // return new Promise((promiseResolve) => {
+  //     if (!this.endpoint) {
+  //       promiseResolve(true);
+  //       return;
+  //     }
+  //     app.loadData(this.endpoint).then(data => {
+  //       this.updateData(data);
+  //       promiseResolve(true);
+  //     });
+  //   });
+
   loadData(uri) {
-    return new Promise((promiseResolve) => {
+    const loader = new Promise((promiseResolve) => {
       xhr({
         uri,
         headers: {
@@ -35,10 +93,12 @@ class App {
         promiseResolve(JSON.parse(response.body));
       });
     });
+    this.loaders.push(loader);
+    return loader;
   }
 
   loadTemplate(templatePath) {
-    return new Promise((promiseResolve) => {
+    const loader = new Promise((promiseResolve) => {
       if (this.templates[templatePath]) {
         promiseResolve(true);
         return;
@@ -62,6 +122,8 @@ class App {
         promiseResolve(true);
       });
     });
+    this.loaders.push(loader);
+    return loader;
   }
 
   switchPage(uri, setHistory = true) {
