@@ -1,32 +1,19 @@
+import app from '../../js/app/app.js';
 import Component from '../../js/app/component.js';
 
 import Button from '../button/index.js';
 
 export default class Card extends Component {
-  constructor($el, data = {}) {
-    const templatePath = 'components/card/template';
-
-    // @TODO: this should be in the Component constructor.
-    if ($el.length > 1) {
-      return Array.from($el).map(($x) => new Card($x, JSON.parse(JSON.stringify(data))));
-    }
-
-    super($el, templatePath, data);
+  initComponents() {
+    this.cmp.button = app.initComponent(Button, this.dom.el.querySelector('.js-cmp-button'));
   }
 
-  registerComponents() {
-    // @TODO: it shouldnt be that hard, should be automized.
-    let mainButtonData = this.data.button;
-    if (this.cmp.mainButton) {
-      mainButtonData = this.cmp.mainButton.data;
-    }
-    Object.assign(this.cmp, {
-      mainButton: new Button(this.dom.el.querySelector('.c-button'), mainButtonData)
-    });
+  dataBinding() {
+    this.cmp.button.updateData(this.data.button);
   }
 
   domEvents() {
-    this.cmp.mainButton.dom.el.addEventListener('click', () => this.partyModeToggle());
+    this.cmp.button.dom.el.addEventListener('click', () => this.partyModeToggle());
   }
 
   partyModeToggle() {
@@ -37,5 +24,15 @@ export default class Card extends Component {
         title: (this.data.partyMode ? 'Party down.' : 'Party up!')
       }
     }, true);
+  }
+
+  static register() {
+    return {
+      templatePath: 'components/card/template'
+    };
+  }
+
+  static registerComponents() {
+    app.registerComponent(Button);
   }
 }

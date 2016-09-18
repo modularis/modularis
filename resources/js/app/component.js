@@ -1,66 +1,33 @@
 import app from '../app/app.js';
 
 export default class Component {
-  constructor($el, templatePath, data = {}, endpoint = null) {
-    // Validate dom element.
-    if (!$el || $el.length === 0) {
-      throw new Error(`${this.constructor.name} has no DOM $el`);
-    }
+  constructor($el, data = {}, templatePath) {
+    this.data = data;
+    this.templatePath = templatePath;
 
-    // this.templatePath = templatePath ||
-    // `components/${this.constructor.name.toLowerCase()}/template`;
-
-    // Dom bindings.
     this.dom = {
       el: $el
     };
 
-    this.templatePath = templatePath;
-    this.data = data;
-    this.endpoint = endpoint;
+    this.cmp = {};
 
-    // Components.
-    this.cmp = {
-      self: this
-    };
-
-    this.init().then(() => this.boot());
+    this.init();
   }
 
   init() {
-    return Promise.all([
-      this.registerComponents(),
-      this.registerTemplate(),
-      this.registerData()
-    ]);
+    this.initComponents();
   }
 
-  registerComponents() {
-    return Promise.resolve();
-  }
-
-  registerTemplate() {
-    return app.loadTemplate(this.templatePath);
-  }
-
-  registerData() {
-    return new Promise((promiseResolve) => {
-      if (!this.endpoint) {
-        promiseResolve(true);
-        return;
-      }
-      app.loadData(this.endpoint).then(data => {
-        this.updateData(data);
-        promiseResolve(true);
-      });
-    });
-  }
+  initComponents() {}
 
   boot() {
+    this.dataBinding();
     this.domBindings();
     this.domEvents();
     this.ready();
   }
+
+  dataBinding() {}
 
   domBindings() {}
 
@@ -77,7 +44,18 @@ export default class Component {
     }
   }
 
-  render(data = {}) {
-    app.render(this.dom.el, this.templatePath, Object.assign({}, this.data, data));
+  render(data = {}, domPatching = true) {
+    return app.render(
+      this.dom.el,
+      this.templatePath,
+      Object.assign({}, this.data, data),
+      domPatching
+    );
   }
+
+  static register() {
+    return {};
+  }
+
+  static registerComponents() {}
 }

@@ -4,24 +4,34 @@ import Controller from '../app/controller.js';
 import Card from '../../components/card/index.js';
 
 class Index extends Controller {
-  constructor() {
-    super(document.querySelector('.controller'), 'views/index', {}, '/');
+  initComponents() {
+    this.cmp.mainTeaser = [];
+    Array.from(this.dom.el.querySelectorAll('.js-cmp-card')).forEach((el) => {
+      this.cmp.mainTeaser.push(app.initComponent(Card, el));
+    });
   }
 
-  registerComponents() {
-    // TODO: Object assign not pretty api.
-    Object.assign(this.cmp, {
-      mainTeasers: new Card(document.querySelectorAll('.c-card'))
-    });
+  dataBinding() {
+    this.cmp.mainTeaser.forEach((teaser) => teaser.updateData(this.data.card));
   }
 
   ready() {
-    document.querySelector('.controller').addEventListener('click', () => console.log('hihi'));
-    document.querySelector('.product-link').addEventListener('click', (e) => {
+    this.dom.el.addEventListener('click', () => console.log('hihi'));
+    this.dom.el.querySelector('.product-link').addEventListener('click', (e) => {
       e.preventDefault();
-      app.switchPage('/product/xy');
+      app.switchPage('product/xy', 'product-page');
     });
-    this.cmp.mainTeasers.forEach((mainTeaser) => mainTeaser.updateData(this.data.card));
+  }
+
+  static register() {
+    return {
+      endpoint: '/',
+      templatePath: 'views/index'
+    };
+  }
+
+  static registerComponents() {
+    app.registerComponent(Card);
   }
 }
 
