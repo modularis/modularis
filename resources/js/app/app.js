@@ -47,6 +47,7 @@ class App {
     this.components.reverse().map((x) => x.boot());
   }
 
+  // @TODO: do we need this?
   initComponent(Component, $el) {
     const componentData = Component.register();
     const component = new Component(

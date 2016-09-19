@@ -9,7 +9,7 @@ const ViewLoader = require('./lib/ViewLoader.js');
 
 const app = express();
 app.use(compression());
-app.use(express.static('public'));
+app.use(express.static('app/public'));
 
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',

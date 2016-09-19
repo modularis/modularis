@@ -7,6 +7,7 @@ class Index extends Controller {
   initComponents() {
     this.cmp.mainTeaser = [];
     Array.from(this.dom.el.querySelectorAll('.js-cmp-card')).forEach((el) => {
+      // @TODO: do wee need init component?
       this.cmp.mainTeaser.push(app.initComponent(Card, el));
     });
   }
@@ -35,4 +36,5 @@ class Index extends Controller {
   }
 }
 
+// @TODO: use same concept for components instead of static register functions.
 app.registerController(Index);

@@ -15,7 +15,7 @@ module.exports = class ViewLoader {
 
   load() {
     return new Promise(promiseResolve => {
-      fs.readFile(path.join('..', 'resources', this.path), {
+      fs.readFile(path.join('resources', this.path), {
         encoding: 'utf8'
       }, (error, data) => {
         if (error) throw error;
