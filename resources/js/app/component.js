@@ -10,26 +10,22 @@ export default class Component {
     };
 
     this.cmp = {};
-
-    this.init();
   }
 
   init() {
-    this.initComponents();
+    this.boot();
   }
 
-  initComponents() {}
-
   boot() {
-    this.dataBinding();
     this.domBindings();
+    this.initComponents();
     this.domEvents();
     this.ready();
   }
 
-  dataBinding() {}
-
   domBindings() {}
+
+  initComponents() {}
 
   domEvents() {}
 
@@ -39,9 +35,7 @@ export default class Component {
     // TODO: should update global state??
     // e.g. card changes state - should change global state or should it not?!?!
     Object.assign(this.data, data);
-    if (render) {
-      this.render();
-    }
+    if (render) this.render();
   }
 
   render(data = {}, domPatching = true) {
@@ -52,10 +46,4 @@ export default class Component {
       domPatching
     );
   }
-
-  static register() {
-    return {};
-  }
-
-  static registerComponents() {}
 }

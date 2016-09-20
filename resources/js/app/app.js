@@ -4,12 +4,13 @@
 
 class App {
   constructor() {
-    this.components = [];
+    this.components = {};
     this.data = {};
     this.templates = {};
     this.loaders = [];
 
     // this.registerServiceWorker();
+
     window.onpopstate = (e) => this.switchPage(e.state.uri, e.state.templateName, false);
   }
 
@@ -21,41 +22,36 @@ class App {
     }
   }
 
-  registerController(Controller) {
-    this.registerComponent(Controller);
+  registerController(Controller, templatePath, endpoint) {
+    this.registerComponent(Controller, templatePath, endpoint);
     Promise.all(this.loaders).then(() => this.initController(Controller));
   }
 
-  registerComponent(Component) {
-    const componentData = Component.register();
-    if (componentData.endpoint) {
-      this.loaders.push(this.loadData(componentData.endpoint));
-    }
-    if (componentData.templatePath) {
-      this.loaders.push(this.loadTemplate(componentData.templatePath));
-    }
-    Component.registerComponents();
+  registerComponent(Component, templatePath, endpoint) {
+    this.components[Component] = {
+      templatePath,
+      endpoint
+    };
+    if (templatePath) this.loaders.push(this.loadTemplate(templatePath));
+    if (endpoint) this.loaders.push(this.loadData(endpoint));
   }
 
   initController(Controller) {
     const $el = document.querySelector('.js-controller');
     this.controller = this.initComponent(Controller, $el);
-    if ($el.classList.contains('is-dirty')) {
-      this.controller.dom.el = this.controller.render({}, false);
-      this.controller.init();
-    }
-    this.components.reverse().map((x) => x.boot());
   }
 
-  // @TODO: do we need this?
-  initComponent(Component, $el) {
-    const componentData = Component.register();
+  initComponent(Component, $el, data) {
+    const componentData = this.components[Component];
     const component = new Component(
       $el,
-      this.data[componentData.endpoint],
+      data || this.data[componentData.endpoint],
       componentData.templatePath
     );
-    this.components.push(component);
+    if ($el.classList.contains('is-dirty')) {
+      component.dom.el = component.render({}, false);
+    }
+    component.init();
     return component;
   }
 

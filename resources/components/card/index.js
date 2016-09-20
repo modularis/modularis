@@ -4,12 +4,16 @@ import Component from '../../js/app/component.js';
 import Button from '../button/index.js';
 
 export default class Card extends Component {
-  initComponents() {
-    this.cmp.button = app.initComponent(Button, this.dom.el.querySelector('.js-cmp-button'));
+  domBindings() {
+    this.dom.button = this.dom.el.querySelector('.js-cmp-button');
   }
 
-  dataBinding() {
-    this.cmp.button.updateData(this.data.button);
+  initComponents() {
+    this.cmp.button = app.initComponent(
+      Button,
+      this.dom.button,
+      this.data.button
+    );
   }
 
   domEvents() {
@@ -25,14 +29,6 @@ export default class Card extends Component {
       }
     }, true);
   }
-
-  static register() {
-    return {
-      templatePath: 'components/card/template'
-    };
-  }
-
-  static registerComponents() {
-    app.registerComponent(Button);
-  }
 }
+
+app.registerComponent(Card, 'components/card/template');
