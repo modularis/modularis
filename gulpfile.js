@@ -159,6 +159,6 @@ gulp.task('html', [
  * Watch
  */
 gulp.task('default', ['browser-sync'], () => {
-  gulp.watch('resources/scss/**/*.scss', ['styles:build']);
-  gulp.watch('resources/js/**/*.js', ['scripts:build']);
+  gulp.watch('resources/**/*.scss', ['styles:build']);
+  gulp.watch('resources/**/*.js', ['scripts:build']);
 });
