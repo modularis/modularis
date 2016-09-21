@@ -8,10 +8,21 @@ module.exports = class IndexController {
     const templateName = 'index';
     const data = {
       header: 'modularis',
-      card: {
-        title: 'Test',
-        button: { title: 'Test Button' },
-        partyMode: false
+      productGrid: {
+        products: [
+          {
+            picture: {
+              src: 'http://placehold.it/150x150'
+            },
+            title: 'Product 1'
+          },
+          {
+            picture: {
+              src: 'http://placehold.it/150x150'
+            },
+            title: 'Product 2'
+          }
+        ]
       },
       templateName
     };

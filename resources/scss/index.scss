@@ -5,7 +5,7 @@
  * - Config switches.
  * - Brand colors, etc.
  */
-@import 'settings/**/*.scss';
+@import 'settings/**/_*.scss';
 
 /**
  * Tools
@@ -14,7 +14,7 @@
  * - Public mixins.
  * - Helper functions.
  */
-@import 'tools/**/*.scss';
+@import 'tools/**/_*.scss';
 
 /**
  * Generic
@@ -23,7 +23,7 @@
  * - Low-specificity, far-reaching.
  * - Resets, Normalize.css, etc.
  */
-@import 'generic/**/*.scss';
+@import 'generic/**/_*.scss';
 
 /**
  * Base
@@ -32,7 +32,7 @@
  * - H1–H6, basic links, lists, etc.
  * - Type selectors (e.g. a {}, blockquote {}).
  */
-@import 'base/**/*.scss';
+@import 'base/**/_*.scss';
 
 /**
  * Objects
@@ -42,7 +42,7 @@
  * - No cosmetics.
  * - Agnostically named classes only (e.g. .o-uilist {}).
  */
-@import 'objects/**/*.scss';
+@import 'objects/**/_*.scss';
 
 /**
  * Components
@@ -51,7 +51,7 @@
  * - Still only using classes.
  * - More explicitly named (e.g. .c-products-list {}).
  */
-@import 'components/**/*.scss';
+@import 'components/**/_*.scss';
 
 /**
  * Utilities
@@ -60,4 +60,4 @@
  * - Only affect one piece of the DOM at a time.
  * - Usually carry !important.
  */
-@import 'utilities/**/*.scss';
+@import 'utilities/**/_*.scss';

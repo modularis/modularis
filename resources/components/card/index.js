@@ -1,8 +1,6 @@
 import app from '../../js/app/app.js';
 import Component from '../../js/app/component.js';
 
-import Button from '../button/index.js';
-
 export default class Card extends Component {
   domBindings() {
     this.dom.button = this.dom.el.querySelector('.js-cmp-button');
@@ -31,4 +29,8 @@ export default class Card extends Component {
   }
 }
 
-app.registerComponent(Card, 'components/card/views/main');
+app.registerComponent(Card, [
+  'components/card/views/main',
+  'components/card/views/body',
+  'components/card/views/figure'
+]);

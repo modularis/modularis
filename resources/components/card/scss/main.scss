@@ -1,3 +1,10 @@
 .c-card {
-  border: 1px solid #444;
+  border: 1px solid #efefef;
+  background-color: #fff;
+}
+
+.c-card__figure {
+  img {
+    width: 100%;
+  }
 }

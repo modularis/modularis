@@ -25,17 +25,23 @@ class App {
     }
   }
 
-  registerController(Controller, templatePath, endpoint) {
-    this.registerComponent(Controller, templatePath, endpoint);
+  registerController(Controller, templatePaths, endpoint) {
+    this.registerComponent(Controller, templatePaths, endpoint);
     Promise.all(this.loaders).then(() => this.initController(Controller));
   }
 
-  registerComponent(Component, templatePath, endpoint) {
+  registerComponent(Component, templatePaths, endpoint) {
+    if (templatePaths && typeof templatePaths !== 'object') templatePaths = [templatePaths];
     this.components[Component] = {
-      templatePath,
+      templatePaths,
       endpoint
     };
-    if (templatePath) this.loaders.push(this.loadTemplate(templatePath));
+    if (templatePaths) {
+      templatePaths.forEach((templatePath) =>
+        this.loaders.push(this.loadTemplate(templatePath))
+      );
+    }
+    // @TODO: allow array endpoints also.
     if (endpoint) this.loaders.push(this.loadData(endpoint));
   }
 
@@ -49,7 +55,7 @@ class App {
     const component = new Component(
       $el,
       data || this.data[componentData.endpoint],
-      componentData.templatePath
+      componentData.templatePaths
     );
     if ($el.classList.contains('is-dirty')) {
       component.dom.el = component.render({}, false);

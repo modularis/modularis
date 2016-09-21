@@ -1,0 +1,11 @@
+.o-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -1.5em;
+  margin-left: -1.5em;
+}
+
+.o-grid__item {
+  padding-top: 1.5em;
+  padding-left: 1.5em;
+}

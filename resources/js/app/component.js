@@ -1,9 +1,9 @@
 import app from '../app/app.js';
 
 export default class Component {
-  constructor($el, data = {}, templatePath) {
+  constructor($el, data = {}, templatePaths) {
     this.data = data;
-    this.templatePath = templatePath;
+    this.templatePaths = templatePaths;
 
     this.dom = {
       el: $el
@@ -38,10 +38,10 @@ export default class Component {
     if (render) this.render();
   }
 
-  render(data = {}, domPatching = true) {
+  render(data = {}, templatePath = this.templatePaths[0], domPatching = true) {
     return app.render(
       this.dom.el,
-      this.templatePath,
+      templatePath,
       Object.assign({}, this.data, data),
       domPatching
     );
