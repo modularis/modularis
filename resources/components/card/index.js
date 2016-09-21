@@ -31,4 +31,4 @@ export default class Card extends Component {
   }
 }
 
-app.registerComponent(Card, 'components/card/template');
+app.registerComponent(Card, 'components/card/views/main');

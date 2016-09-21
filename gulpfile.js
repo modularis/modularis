@@ -39,13 +39,16 @@ gulp.task('serve', () =>
  * Styles
  */
 gulp.task('styles:build', () =>
-  gulp.src('resources/scss/*.scss')
+  gulp.src('resources/**/*.scss')
     .pipe(sourcemaps.init())
       .pipe(sass({
         importer: nodeSassMagicImporter
       }).on('error', sass.logError))
       .pipe(autoprefixer())
-    .pipe(sourcemaps.write({ sourceRoot: '/resources/scss' }))
+      .pipe(rename((originalPath) => {
+        originalPath.dirname = originalPath.dirname.replace('scss', '');
+      }))
+    .pipe(sourcemaps.write({ sourceRoot: '/resources' }))
     .pipe(gulp.dest('app/public/css'))
     .pipe(rename((originalPath) => {
       originalPath.basename += '.min';
@@ -55,7 +58,7 @@ gulp.task('styles:build', () =>
 );
 
 gulp.task('styles:lint', () =>
-  gulp.src('resources/scss/**/*.scss')
+  gulp.src('resources/**/*.scss')
     .pipe(stylelint({
       syntax: 'scss',
       reporters: [
