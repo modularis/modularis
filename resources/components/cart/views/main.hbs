@@ -1,0 +1,28 @@
+<div class="js-cmp-cart">
+  {{#if products }}
+    <link rel="stylesheet" href="/css/components/cart/main.css">
+    <div class="c-cart">
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each products}}
+            <tr>
+              <td>{{ title }}</td>
+              <td>{{ quantity }} €</td>
+              <td>{{ price }} €</td>
+            </tr>
+          {{/each}}
+          <tr>
+            <td><strong>Total:</strong></td>
+            <td>{{ total }} €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  {{/if}}
+</div>

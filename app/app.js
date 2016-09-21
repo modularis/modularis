@@ -31,6 +31,11 @@ app.get('/product/xy', (request, response) => {
   productController.page();
 });
 
+app.get('/add-to-cart/:id', (request, response) => {
+  const productController = new ProductController(request, response);
+  productController.addToCart();
+});
+
 app.get('/view-loader/:view', (request, response) => {
   const viewLoader = new ViewLoader(request, response);
   viewLoader.deliver();

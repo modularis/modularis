@@ -11,18 +11,34 @@ module.exports = class IndexController {
       productGrid: {
         products: [
           {
+            id: 1,
             picture: {
               src: 'http://placehold.it/150x150'
             },
-            title: 'Product 1'
+            title: 'Product 1',
+            price: '300',
+            addToCartButton: {
+              title: 'Add to cart',
+              anchor: 'add-to-cart/1'
+            }
           },
           {
+            id: 2,
             picture: {
               src: 'http://placehold.it/150x150'
             },
-            title: 'Product 2'
+            title: 'Product 2',
+            price: '299',
+            addToCartButton: {
+              title: 'Add to cart',
+              anchor: 'add-to-cart/2'
+            }
           }
         ]
+      },
+      cart: {
+        products: null,
+        total: 0
       },
       templateName
     };

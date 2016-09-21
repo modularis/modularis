@@ -4,31 +4,20 @@ import Component from '../../js/app/component.js';
 import ProductPreview from '../productPreview/index.js';
 
 export default class ProductGrid extends Component {
-  // domBindings() {
-  //   this.dom.button = this.dom.el.querySelector('.js-cmp-button');
-  // }
+  domBindings() {
+    this.dom.productPreviews = this.dom.el.querySelectorAll('.js-cmp-product-preview');
+  }
 
-  // initComponents() {
-  //   this.cmp.button = app.initComponent(
-  //     Button,
-  //     this.dom.button,
-  //     this.data.button
-  //   );
-  // }
-
-  // domEvents() {
-  //   this.cmp.button.dom.el.addEventListener('click', () => this.partyModeToggle());
-  // }
-
-  // partyModeToggle() {
-  //   this.updateData({
-  //     partyMode: !this.data.partyMode,
-  //     title: (this.data.partyMode ? 'PARTY!!' : 'No party.'),
-  //     button: {
-  //       title: (this.data.partyMode ? 'Party down.' : 'Party up!')
-  //     }
-  //   }, true);
-  // }
+  initComponents() {
+    this.cmp.productPreviews = [];
+    Array.from(this.dom.productPreviews).forEach(($el, index) =>
+      this.cmp.productPreviews.push(app.initComponent(
+        ProductPreview,
+        $el,
+        this.data.products[index]
+      ))
+    );
+  }
 }
 
 app.registerComponent(ProductGrid, 'components/productGrid/views/main');

@@ -2,13 +2,15 @@
   <link rel="stylesheet" href="/css/components/productPreview/main.css">
   <div class="c-product-preview">
     {{#> "components/card/views/main" }}
-      {{#if picture}}
+      {{#if picture }}
         {{#> "components/card/views/figure" }}
-          <img src="{{picture.src}}">
+          <img src="{{ picture.src }}">
         {{/"components/card/views/figure"}}
       {{/if}}
       {{#> "components/card/views/body" }}
         <h2>{{ title }}</h2>
+        <p>Price: {{ price }} €</p>
+        {{> components/button/views/main addToCartButton }}
       {{/"components/card/views/body"}}
     {{/"components/card/views/main"}}
   </div>
