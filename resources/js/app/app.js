@@ -9,6 +9,9 @@ class App {
     this.templates = {};
     this.loaders = [];
 
+    this.dataLoaders = {};
+    this.templateLoaders = {};
+
     // this.registerServiceWorker();
 
     window.onpopstate = (e) => this.switchPage(e.state.uri, e.state.templateName, false);
@@ -55,13 +58,11 @@ class App {
     return component;
   }
 
-  loadData(uri, reload = false) {
-    return new Promise((promiseResolve) => {
-      if (this.data[uri] && !reload) {
-        promiseResolve(true);
-        return;
-      }
-      this.data[uri] = 'loading';
+  loadData(uri, reload = true) {
+    if (this.dataLoaders[uri] && !reload) {
+      return this.dataLoaders[uri];
+    }
+    const dataLoader = new Promise((promiseResolve) => {
       xhr({
         uri,
         headers: {
@@ -75,15 +76,15 @@ class App {
         promiseResolve(this.data[uri]);
       });
     });
+    this.dataLoaders[uri] = dataLoader;
+    return dataLoader;
   }
 
   loadTemplate(templatePath, reload = false) {
-    return new Promise((promiseResolve) => {
-      if (this.templates[templatePath] && !reload) {
-        promiseResolve(true);
-        return;
-      }
-      this.templates[templatePath] = 'loading';
+    if (this.templateLoaders[templatePath] && !reload) {
+      return this.templateLoaders[templatePath];
+    }
+    const templateLoader = new Promise((promiseResolve) => {
       // Set the template temporary to prevent loading it again.
       xhr({
         uri: `/view-loader/${templatePath.split('/').join('.')}`,
@@ -102,6 +103,8 @@ class App {
         promiseResolve(this.templates[templatePath]);
       });
     });
+    this.templateLoaders[templatePath] = templateLoader;
+    return templateLoader;
   }
 
   switchPage(uri, templateName, setHistory = true) {
