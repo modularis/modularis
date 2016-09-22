@@ -14,7 +14,7 @@ export default class Cart extends Component {
       }
     });
     if (addProduct) {
-      this.data.products.push(product);
+      this.data.products.push(JSON.parse(JSON.stringify(product)));
     }
     this.data.total = this.calcTotal(this.data.products);
     this.render();

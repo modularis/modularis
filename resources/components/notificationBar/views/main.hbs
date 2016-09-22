@@ -2,7 +2,7 @@
   <link rel="stylesheet" href="/css/components/notificationBar/main.css">
   <ul class="c-notification-bar">
     {{#each items }}
-      <li class="c-notification-bar__item{{#if show }} do-show{{/if}}{{#if hide }} do-hide{{/if}}">
+      <li class="c-notification-bar__item{{#if show }} do-show{{/if}}{{#if hide }} do-hide{{/if}}" data-key="{{ id }}">
         <h3>{{ title }}</h3>
         {{#if body }}
           <p>{{ body }}</p>
