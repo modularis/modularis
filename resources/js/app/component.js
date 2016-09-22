@@ -32,8 +32,7 @@ export default class Component {
   ready() {}
 
   updateData(data = {}, render = false) {
-    // TODO: should update global state??
-    // e.g. card changes state - should change global state or should it not?!?!
+    // @TODO: deep merging would be nice.
     Object.assign(this.data, data);
     if (render) this.render();
   }
