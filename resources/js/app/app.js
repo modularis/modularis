@@ -64,23 +64,33 @@ class App {
     return component;
   }
 
+  offlineDebouncer(callback) {
+    if (!navigator.onLine) {
+      setTimeout(() => this.offlineDebouncer(callback), 500);
+      return;
+    }
+    callback();
+  }
+
   loadData(uri, reload = true) {
     if (this.dataLoaders[uri] && !reload) {
       return this.dataLoaders[uri];
     }
-    const dataLoader = new Promise((promiseResolve) => {
-      xhr({
-        uri,
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      }, (error, response) => {
-        if (error) {
-          throw new Error(error);
-        }
-        this.data[uri] = JSON.parse(response.body);
-        promiseResolve(this.data[uri]);
-      });
+    const dataLoader = new Promise((done) => {
+      this.offlineDebouncer(() =>
+        xhr({
+          uri,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        }, (error, response) => {
+          if (error) {
+            throw new Error(error);
+          }
+          this.data[uri] = JSON.parse(response.body);
+          done(this.data[uri]);
+        })
+      );
     });
     this.dataLoaders[uri] = dataLoader;
     return dataLoader;
@@ -90,24 +100,26 @@ class App {
     if (this.templateLoaders[templatePath] && !reload) {
       return this.templateLoaders[templatePath];
     }
-    const templateLoader = new Promise((promiseResolve) => {
-      // Set the template temporary to prevent loading it again.
-      xhr({
-        uri: `/view-loader/${templatePath.split('/').join('.')}`,
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      }, (error, response) => {
-        if (error) {
-          throw new Error(error);
-        }
-        // eslint-disable-next-line no-new-func
-        const compile = new Function(`return ${response.body}`);
-        const compiledTemplate = Handlebars.template(compile());
-        Handlebars.registerPartial(templatePath, compiledTemplate);
-        this.templates[templatePath] = compiledTemplate;
-        promiseResolve(this.templates[templatePath]);
-      });
+    const templateLoader = new Promise((done) => {
+      this.offlineDebouncer(() =>
+        // Set the template temporary to prevent loading it again.
+        xhr({
+          uri: `/view-loader/${templatePath.split('/').join('.')}`,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        }, (error, response) => {
+          if (error) {
+            throw new Error(error);
+          }
+          // eslint-disable-next-line no-new-func
+          const compile = new Function(`return ${response.body}`);
+          const compiledTemplate = Handlebars.template(compile());
+          Handlebars.registerPartial(templatePath, compiledTemplate);
+          this.templates[templatePath] = compiledTemplate;
+          done(this.templates[templatePath]);
+        })
+      );
     });
     this.templateLoaders[templatePath] = templateLoader;
     return templateLoader;

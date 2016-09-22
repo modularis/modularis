@@ -16,8 +16,18 @@ export default class Cart extends Component {
     if (addProduct) {
       this.data.products.push(product);
     }
-    this.data.total = this.data.products.reduce((total, x) => (total + (x.quantity * x.price)), 0);
-    this.updateData({}, true);
+    this.data.total = this.calcTotal(this.data.products);
+    this.render();
+  }
+
+  remove(product) {
+    this.data.products = this.data.products.filter((x) => x.id !== product.id);
+    this.data.total = this.calcTotal(this.data.products);
+    this.render();
+  }
+
+  calcTotal(products) {
+    return products.reduce((total, x) => (total + (x.quantity * x.price)), 0);
   }
 }
 

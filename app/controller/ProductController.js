@@ -70,7 +70,12 @@ module.exports = class ProductController {
       let jsonData;
       switch (this.request.params.id) {
         case '2': {
-          jsonData = data.cart.products[1];
+          // jsonData = data.cart.products[1];
+          jsonData = {
+            status: 'error',
+            title: 'Error!',
+            body: 'Product not available'
+          };
           break;
         }
         default: {

@@ -17,6 +17,7 @@ module.exports = class IndexController {
             },
             title: 'Product 1',
             price: '300',
+            quantity: 1,
             addToCartButton: {
               title: 'Add to cart',
               anchor: 'add-to-cart/1'
@@ -29,6 +30,7 @@ module.exports = class IndexController {
             },
             title: 'Product 2',
             price: '299',
+            quantity: 1,
             addToCartButton: {
               title: 'Add to cart',
               anchor: 'add-to-cart/2'
@@ -39,6 +41,9 @@ module.exports = class IndexController {
       cart: {
         products: null,
         total: 0
+      },
+      notificationBar: {
+        items: []
       },
       templateName
     };

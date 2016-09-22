@@ -15,7 +15,18 @@ export default class ProductPreview extends Component {
 
   addToCart(e) {
     e.preventDefault();
-    app.loadData(e.currentTarget.href).then((data) => app.controller.cmp.cart.add(data));
+
+    app.controller.cmp.cart.add(this.data);
+    app.controller.cmp.notificationBar.add({
+      title: 'Produkt in den Warenkorb gelegt.!',
+      body: `Produkt "${this.data.title}" wurde in den Warenkorb gelegt.`
+    });
+    app.loadData(e.currentTarget.href).then((data) => {
+      if (data.status === 'error') {
+        app.controller.cmp.cart.remove(this.data);
+        app.controller.cmp.notificationBar.add({ title: data.title, body: data.body });
+      }
+    });
   }
 }
 

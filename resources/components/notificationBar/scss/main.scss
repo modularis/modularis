@@ -1,0 +1,39 @@
+.c-notification-bar__item {
+  &.do-show {
+    animation: c-notification-bar-show 0.6s both;
+  }
+
+  &.do-hide {
+    animation: c-notification-bar-hide 0.6s both;
+  }
+}
+
+@keyframes c-notification-bar-show {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+  50% {
+    max-height: 300px;
+    opacity: 0;
+  }
+  100% {
+    max-height: 300px;
+    opacity: 1;
+  }
+}
+
+@keyframes c-notification-bar-hide {
+  0% {
+    max-height: 300px;
+    opacity: 1;
+  }
+  50% {
+    max-height: 300px;
+    opacity: 0;
+  }
+  100% {
+    max-height: 0;
+    opacity: 0;
+  }
+}
