@@ -64,9 +64,9 @@ class App {
     return component;
   }
 
-  offlineDebouncer(callback) {
+  retryIfOffline(callback) {
     if (!navigator.onLine) {
-      setTimeout(() => this.offlineDebouncer(callback), 500);
+      setTimeout(() => this.retryIfOffline(callback), 500);
       return;
     }
     callback();
@@ -77,7 +77,7 @@ class App {
       return this.dataLoaders[uri];
     }
     const dataLoader = new Promise((done) => {
-      this.offlineDebouncer(() =>
+      this.retryIfOffline(() =>
         xhr({
           uri,
           headers: {
@@ -101,7 +101,7 @@ class App {
       return this.templateLoaders[templatePath];
     }
     const templateLoader = new Promise((done) => {
-      this.offlineDebouncer(() =>
+      this.retryIfOffline(() =>
         // Set the template temporary to prevent loading it again.
         xhr({
           uri: `/view-loader/${templatePath.split('/').join('.')}`,
