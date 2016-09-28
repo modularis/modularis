@@ -31,10 +31,15 @@ export default class Component {
 
   ready() {}
 
+  setData(data = {}, render = false) {
+    // @TODO: clone data?
+    this.data = data;
+    if (render) this.render();
+  }
+
   updateData(data = {}, render = false) {
     // @TODO: deep merging would be nice.
-    Object.assign(this.data, data);
-    if (render) this.render();
+    return this.setData(Object.assign({}, this.data, data), render);
   }
 
   render(data = {}, templatePath = this.templatePaths[0], domPatching = true) {
