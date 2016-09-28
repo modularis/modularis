@@ -16,6 +16,7 @@ const path = require('path');
 const rename = require('gulp-rename');
 const rollup = require('rollup-stream');
 const sass = require('gulp-sass');
+const sizereport = require('gulp-sizereport');
 const source = require('vinyl-source-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const stylelint = require('gulp-stylelint');
@@ -64,6 +65,19 @@ gulp.task('styles:lint', () =>
       reporters: [
         { formatter: 'string', console: true }
       ]
+    }))
+);
+
+gulp.task('styles:sizereport', () =>
+  gulp.src('app/public/**/*.min.css')
+    .pipe(sizereport({
+      gzip: true,
+      '*': {
+        maxGzippedSize: 5000
+      },
+      'css/index.min.css': {
+        maxGzippedSize: 10000
+      }
     }))
 );
 
@@ -139,6 +153,22 @@ gulp.task('scripts:lint', () =>
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
+);
+
+gulp.task('scripts:sizereport', () =>
+  gulp.src('app/public/**/*.min.js')
+    .pipe(sizereport({
+      gzip: true,
+      '*': {
+        maxGzippedSize: 10000
+      },
+      'js/index.min.js': {
+        maxGzippedSize: 5000
+      },
+      'js/global.min.js': {
+        maxGzippedSize: 20000
+      }
+    }))
 );
 
 gulp.task('scripts', [
