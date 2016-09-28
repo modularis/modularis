@@ -5,17 +5,18 @@ import '../button/index.js';
 
 export default class Cart extends Component {
   add(product) {
-    this.data.products = this.data.products || [];
+    const products = this.data.products || [];
     let addProduct = true;
-    this.data.products.forEach((x) => {
+    products.forEach((x) => {
       if (x.id === product.id) {
         x.quantity += product.quantity;
         addProduct = false;
       }
     });
     if (addProduct) {
-      this.data.products.push(JSON.parse(JSON.stringify(product)));
+      products.push(product);
     }
+    this.data.products = JSON.parse(JSON.stringify(products));
     this.data.total = this.calcTotal(this.data.products);
     this.render();
   }

@@ -1,3 +1,5 @@
+/* global deepMerge */
+
 import app from '../app/app.js';
 
 export default class Component {
@@ -38,8 +40,7 @@ export default class Component {
   }
 
   updateData(data = {}, render = false) {
-    // @TODO: deep merging would be nice.
-    return this.setData(Object.assign({}, this.data, data), render);
+    return this.setData(deepMerge(this.data, data), render);
   }
 
   render(data = {}, templatePath = this.templatePaths[0], domPatching = true) {
