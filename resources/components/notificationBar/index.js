@@ -3,12 +3,12 @@ import Component from '../../js/app/component.js';
 
 export default class NotificationBar extends Component {
   domEvents() {
-    this.dom.el.addEventListener('click', (e) => {
-      if (e.target.classList.contains('c-notification-bar__close')) {
+    this.dom.el.addEventListener(`click`, (e) => {
+      if (e.target.classList.contains(`c-notification-bar__close`)) {
         e.preventDefault();
 
         const $notification = e.target.parentNode;
-        $notification.classList.add('do-hide');
+        $notification.classList.add(`do-hide`);
         const notification = {
           id: parseInt($notification.dataset.key, 10)
         };
@@ -32,4 +32,4 @@ export default class NotificationBar extends Component {
   }
 }
 
-app.registerComponent(NotificationBar, 'components/notificationBar/views/main');
+app.registerComponent(NotificationBar, `components/notificationBar/views/main`);

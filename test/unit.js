@@ -1,5 +1,5 @@
 /* eslint-env node, mocha */
-describe('modularis', () => {
+describe(`modularis`, () => {
   // const expect = require('chai').expect;
 
   // it('should be TEST CASE', () => {

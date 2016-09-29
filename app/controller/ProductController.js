@@ -5,20 +5,20 @@ module.exports = class ProductController {
   }
 
   page() {
-    const templateName = 'product-page';
+    const templateName = `product-page`;
     const data = {
-      header: 'Product XY',
-      body: 'Lorem Ipsum dolor sit',
-      image: 'img/product.jpg',
+      header: `Product XY`,
+      body: `Lorem Ipsum dolor sit`,
+      image: `img/product.jpg`,
       details: {
-        weight: '20kg',
-        price: '300 €'
+        weight: `20kg`,
+        price: `300 €`
       },
       templateName
     };
     if (
-      this.request.headers['x-requested-with'] &&
-      this.request.headers['x-requested-with'] === 'XMLHttpRequest'
+      this.request.headers[`x-requested-with`] &&
+      this.request.headers[`x-requested-with`] === `XMLHttpRequest`
     ) {
       this.response.json(data);
     } else {
@@ -27,35 +27,35 @@ module.exports = class ProductController {
   }
 
   addToCart() {
-    const templateName = 'product-add-to-cart';
+    const templateName = `product-add-to-cart`;
     const data = {
-      header: 'cart',
+      header: `cart`,
       cart: {
         products: [
           {
             id: 1,
             picture: {
-              src: 'http://placehold.it/150x150'
+              src: `http://placehold.it/150x150`
             },
-            title: 'Product 1',
+            title: `Product 1`,
             price: 300,
             quantity: 1,
             addToCartButton: {
-              title: 'Add to cart',
-              anchor: 'add-to-cart/1'
+              title: `Add to cart`,
+              anchor: `add-to-cart/1`
             }
           },
           {
             id: 2,
             picture: {
-              src: 'http://placehold.it/150x150'
+              src: `http://placehold.it/150x150`
             },
-            title: 'Product 2',
+            title: `Product 2`,
             price: 299,
             quantity: 1,
             addToCartButton: {
-              title: 'Add to cart',
-              anchor: 'add-to-cart/2'
+              title: `Add to cart`,
+              anchor: `add-to-cart/2`
             }
           }
         ],
@@ -64,17 +64,17 @@ module.exports = class ProductController {
       templateName
     };
     if (
-      this.request.headers['x-requested-with'] &&
-      this.request.headers['x-requested-with'] === 'XMLHttpRequest'
+      this.request.headers[`x-requested-with`] &&
+      this.request.headers[`x-requested-with`] === `XMLHttpRequest`
     ) {
       let jsonData;
       switch (this.request.params.id) {
-        case '2': {
+        case `2`: {
           // jsonData = data.cart.products[1];
           jsonData = {
-            status: 'error',
-            title: 'Error!',
-            body: 'Product not available'
+            status: `error`,
+            title: `Error!`,
+            body: `Product not available`
           };
           break;
         }

@@ -6,11 +6,11 @@ import '../card/index.js';
 
 export default class ProductPreview extends Component {
   domBindings() {
-    this.dom.addToCardButton = this.dom.el.querySelector('.c-button');
+    this.dom.addToCardButton = this.dom.el.querySelector(`.c-button`);
   }
 
   domEvents() {
-    this.dom.addToCardButton.addEventListener('click', (e) => this.addToCart(e));
+    this.dom.addToCardButton.addEventListener(`click`, (e) => this.addToCart(e));
   }
 
   addToCart(e) {
@@ -18,11 +18,11 @@ export default class ProductPreview extends Component {
 
     app.controller.cmp.cart.add(this.data);
     app.controller.cmp.notificationBar.add({
-      title: 'Produkt in den Warenkorb gelegt.!',
+      title: `Produkt in den Warenkorb gelegt.!`,
       body: `Produkt "${this.data.title}" wurde in den Warenkorb gelegt.`
     });
     app.loadData(e.currentTarget.href).then((data) => {
-      if (data.status === 'error') {
+      if (data.status === `error`) {
         app.controller.cmp.cart.remove(this.data);
         app.controller.cmp.notificationBar.add({ title: data.title, body: data.body });
       }
@@ -30,4 +30,4 @@ export default class ProductPreview extends Component {
   }
 }
 
-app.registerComponent(ProductPreview, 'components/productPreview/views/main');
+app.registerComponent(ProductPreview, `components/productPreview/views/main`);

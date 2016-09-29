@@ -1,8 +1,8 @@
 const config = {
-  version: '0.0.1',
+  version: `0.0.1`,
   staticCacheItems: [
-    '/css/index.css',
-    '/js/index.js'
+    `/css/index.css`,
+    `/js/index.js`
   ],
   cachePathPattern: /^\/(.*)$/
 };
@@ -35,7 +35,7 @@ function shouldHandleFetch(event, opts) {
   const url = new URL(request.url);
   const criteria = {
     matchesPathPattern: opts.cachePathPattern.test(url.pathname),
-    isGETRequest: request.method === 'GET',
+    isGETRequest: request.method === `GET`,
     isFromMyOrigin: url.origin === self.location.origin
   };
   const failingCriteria = Object.keys(criteria).filter(criteriaKey => !criteria[criteriaKey]);
@@ -44,19 +44,19 @@ function shouldHandleFetch(event, opts) {
 
 function onFetch(event, opts) {
   const request = event.request;
-  const acceptHeader = request.headers.get('Accept');
-  let resourceType = 'static';
+  const acceptHeader = request.headers.get(`Accept`);
+  let resourceType = `static`;
   let cacheKey = null;
 
-  if (acceptHeader.indexOf('text/html') !== -1) {
-    resourceType = 'content';
-  } else if (acceptHeader.indexOf('image') !== -1) {
-    resourceType = 'image';
+  if (acceptHeader.indexOf(`text/html`) !== -1) {
+    resourceType = `content`;
+  } else if (acceptHeader.indexOf(`image`) !== -1) {
+    resourceType = `image`;
   }
 
   cacheKey = cacheName(resourceType, opts);
 
-  if (resourceType === 'content') {
+  if (resourceType === `content`) {
     event.respondWith(
       fetch(request)
         .then(response => addToCache(cacheKey, request, response))
@@ -74,17 +74,17 @@ function onFetch(event, opts) {
 }
 
 function onInstall(event, opts) {
-  const cacheKey = cacheName('static', opts);
+  const cacheKey = cacheName(`static`, opts);
   return caches.open(cacheKey).then((cache) => cache.addAll(opts.staticCacheItems));
 }
 
-self.addEventListener('install', (event) => {
+self.addEventListener(`install`, (event) => {
   event.waitUntil(
     onInstall(event, config).then(() => self.skipWaiting())
   );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener(`fetch`, event => {
   if (shouldHandleFetch(event, config)) {
     onFetch(event, config);
   }

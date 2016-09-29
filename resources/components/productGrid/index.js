@@ -5,7 +5,7 @@ import ProductPreview from '../productPreview/index.js';
 
 export default class ProductGrid extends Component {
   domBindings() {
-    this.dom.productPreviews = this.dom.el.querySelectorAll('.js-cmp-product-preview');
+    this.dom.productPreviews = this.dom.el.querySelectorAll(`.js-cmp-product-preview`);
   }
 
   initComponents() {
@@ -20,4 +20,4 @@ export default class ProductGrid extends Component {
   }
 }
 
-app.registerComponent(ProductGrid, 'components/productGrid/views/main');
+app.registerComponent(ProductGrid, `components/productGrid/views/main`);

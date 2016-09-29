@@ -7,9 +7,9 @@ import NotificationBar from '../../components/notificationBar/index.js';
 
 class Index extends Controller {
   domBindings() {
-    this.dom.cart = this.dom.el.querySelector('.js-cmp-cart');
-    this.dom.productGrid = this.dom.el.querySelector('.js-cmp-product-grid');
-    this.dom.notificationBar = this.dom.el.querySelector('.js-cmp-notification-bar');
+    this.dom.cart = this.dom.el.querySelector(`.js-cmp-cart`);
+    this.dom.productGrid = this.dom.el.querySelector(`.js-cmp-product-grid`);
+    this.dom.notificationBar = this.dom.el.querySelector(`.js-cmp-notification-bar`);
   }
 
   initComponents() {
@@ -33,4 +33,4 @@ class Index extends Controller {
   }
 }
 
-app.registerController(Index, 'views/index', '/');
+app.registerController(Index, `views/index`, `/`);

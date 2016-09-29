@@ -5,35 +5,35 @@ module.exports = class IndexController {
   }
 
   index() {
-    const templateName = 'index';
+    const templateName = `index`;
     const data = {
-      header: 'modularis',
+      header: `modularis`,
       productGrid: {
         products: [
           {
             id: 1,
             picture: {
-              src: 'http://placehold.it/150x150'
+              src: `http://placehold.it/150x150`
             },
-            title: 'Product 1',
-            price: '300',
+            title: `Product 1`,
+            price: `300`,
             quantity: 1,
             addToCartButton: {
-              title: 'Add to cart',
-              anchor: 'add-to-cart/1'
+              title: `Add to cart`,
+              anchor: `add-to-cart/1`
             }
           },
           {
             id: 2,
             picture: {
-              src: 'http://placehold.it/150x150'
+              src: `http://placehold.it/150x150`
             },
-            title: 'Product 2',
-            price: '299',
+            title: `Product 2`,
+            price: `299`,
             quantity: 1,
             addToCartButton: {
-              title: 'Add to cart',
-              anchor: 'add-to-cart/2'
+              title: `Add to cart`,
+              anchor: `add-to-cart/2`
             }
           }
         ]
@@ -48,8 +48,8 @@ module.exports = class IndexController {
       templateName
     };
     if (
-      this.request.headers['x-requested-with'] &&
-      this.request.headers['x-requested-with'] === 'XMLHttpRequest'
+      this.request.headers[`x-requested-with`] &&
+      this.request.headers[`x-requested-with`] === `XMLHttpRequest`
     ) {
       this.response.json(data);
     } else {

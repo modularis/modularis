@@ -32,4 +32,4 @@ export default class Cart extends Component {
   }
 }
 
-app.registerComponent(Cart, 'components/cart/views/main');
+app.registerComponent(Cart, `components/cart/views/main`);

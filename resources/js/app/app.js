@@ -18,9 +18,9 @@ class App {
   }
 
   registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js', {
-        scope: '/'
+    if (`serviceWorker` in navigator) {
+      navigator.serviceWorker.register(`/service-worker.js`, {
+        scope: `/`
       });
     }
   }
@@ -31,7 +31,7 @@ class App {
   }
 
   registerComponent(Component, templatePaths, endpoint) {
-    if (templatePaths && typeof templatePaths !== 'object') templatePaths = [templatePaths];
+    if (templatePaths && typeof templatePaths !== `object`) templatePaths = [templatePaths];
     this.components[Component] = {
       templatePaths,
       endpoint
@@ -46,7 +46,7 @@ class App {
   }
 
   initController(Controller) {
-    const $el = document.querySelector('.js-controller');
+    const $el = document.querySelector(`.js-controller`);
     this.controller = this.initComponent(Controller, $el);
   }
 
@@ -57,7 +57,7 @@ class App {
       data || this.data[componentData.endpoint],
       componentData.templatePaths
     );
-    if ($el.classList.contains('is-dirty')) {
+    if ($el.classList.contains(`is-dirty`)) {
       component.dom.el = component.render({}, false);
     }
     component.init();
@@ -81,7 +81,7 @@ class App {
         xhr({
           uri,
           headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+            'X-Requested-With': `XMLHttpRequest`
           }
         }, (error, response) => {
           if (error) {
@@ -104,9 +104,9 @@ class App {
       this.retryIfOffline(() =>
         // Set the template temporary to prevent loading it again.
         xhr({
-          uri: `/view-loader/${templatePath.split('/').join('.')}`,
+          uri: `/view-loader/${templatePath.split(`/`).join(`.`)}`,
           headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+            'X-Requested-With': `XMLHttpRequest`
           }
         }, (error, response) => {
           if (error) {
@@ -127,15 +127,15 @@ class App {
 
   switchPage(uri, templateName, setHistory = true) {
     // Mark the old controller as dirty to trigger render.
-    this.controller.dom.el.classList.add('is-dirty');
+    this.controller.dom.el.classList.add(`is-dirty`);
 
     // Add new controller script and remove the old one.
-    const controllerScriptClass = 'js-controller-script';
+    const controllerScriptClass = `js-controller-script`;
     document.querySelector(`.${controllerScriptClass}`).remove();
-    const controllerScript = document.createElement('script');
+    const controllerScript = document.createElement(`script`);
     controllerScript.src = `/js/${templateName}.js`;
     controllerScript.classList.add(controllerScriptClass);
-    document.querySelector('body').appendChild(controllerScript);
+    document.querySelector(`body`).appendChild(controllerScript);
 
     if (setHistory) {
       history.pushState({ uri, templateName }, document.title, uri);
@@ -182,7 +182,7 @@ class App {
       setDOM($el, markup);
       return $el;
     }
-    const $wrap = document.createElement('div');
+    const $wrap = document.createElement(`div`);
     $wrap.innerHTML = markup;
     const $newNode = $wrap.firstChild;
     const $parentNode = $el.parentNode;
