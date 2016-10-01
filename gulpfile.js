@@ -9,9 +9,9 @@ const glob = require(`glob`);
 const gulp = require(`gulp`);
 const htmllint = require(`gulp-htmllint`);
 const merge = require(`merge-stream`);
+const nodemon = require(`gulp-nodemon`);
 const nodeResolve = require(`rollup-plugin-node-resolve`);
 const nodeSassMagicImporter = require(`node-sass-magic-importer`);
-const nodemon = require(`gulp-nodemon`);
 const path = require(`path`);
 const rename = require(`gulp-rename`);
 const rollup = require(`rollup-stream`);
@@ -166,7 +166,7 @@ gulp.task(`scripts:sizereport`, () =>
         maxGzippedSize: 5000
       },
       'js/global.min.js': {
-        maxGzippedSize: 20000
+        maxGzippedSize: 8000
       }
     }))
 );
