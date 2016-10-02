@@ -54,7 +54,7 @@
     "rollup-plugin-commonjs": "^3.3.1",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-stream": "^1.13.0",
-    "stylelint-config-modularis": "0.0.1",
+    "stylelint-config-modularis": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "zombie": "^4.2.1"
