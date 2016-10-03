@@ -1,7 +1,7 @@
 const config = {
   version: `0.0.1`,
   staticCacheItems: [
-    `/css/index.css`,
+    `/css/global.css`,
     `/js/index.js`
   ],
   cachePathPattern: /^\/(.*)$/

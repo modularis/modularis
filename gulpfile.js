@@ -75,7 +75,7 @@ gulp.task(`styles:sizereport`, () =>
       '*': {
         maxGzippedSize: 5000
       },
-      'css/index.min.css': {
+      'css/global.min.css': {
         maxGzippedSize: 10000
       }
     }))
