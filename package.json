@@ -60,6 +60,7 @@
     "zombie": "^4.2.1"
   },
   "scripts": {
+    "start": "gulp",
     "test:styles:reference": "cd node_modules/backstopjs && npm run reference",
     "test:styles": "cd node_modules/backstopjs && npm run test",
     "test:scripts": "mocha test/unit.js",
