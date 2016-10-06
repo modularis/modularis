@@ -1,6 +1,7 @@
 const compression = require(`compression`);
 const express = require(`express`);
 const exphbs = require(`express-handlebars`);
+const fs = require(`fs`);
 const glob = require(`glob`);
 const path = require(`path`);
 
@@ -9,8 +10,6 @@ const ProductController = require(`./controller/ProductController.js`);
 const ViewLoader = require(`./lib/ViewLoader.js`);
 
 const app = express();
-app.use(compression());
-app.use(express.static(`app/public`));
 
 app.engine(`.hbs`, exphbs({
   defaultLayout: `main`,
@@ -22,12 +21,13 @@ app.engine(`.hbs`, exphbs({
 app.set(`view engine`, `.hbs`);
 app.set(`views`, path.join(__dirname, `../resources/views`));
 
-
 let css = glob.sync(path.join(__dirname, `public`, `**`, `*.css`));
 css = css.reduce((previous, x) => {
+  const mtime = Math.round(new Date(fs.statSync(x).mtime).getTime() / 1000);
   const relPath = path.relative(path.join(__dirname, `public`), x);
   const pathObject = path.parse(relPath);
-  previous[pathObject.name] = path.join(`/`, relPath);
+  const name = `${pathObject.name}.${mtime}${pathObject.ext}`;
+  previous[pathObject.name] = path.join(`/`, pathObject.dir, name);
   return previous;
 }, {});
 
@@ -46,6 +46,17 @@ app.use((req, res, next) => {
   };
   next();
 });
+
+const cacheBustMatch = /^\/(css|js)\/(.*)?\.[0-9]*\.(css|js)$/;
+app.use((req, res, next) => {
+  if (req.url.match(cacheBustMatch)) {
+    req.url = req.url.replace(cacheBustMatch, `/$1/$2.$3`);
+  }
+  next();
+});
+
+app.use(compression());
+app.use(express.static(`app/public`));
 
 app.get(`/`, (request, response) => {
   const indexController = new IndexController(request, response);
