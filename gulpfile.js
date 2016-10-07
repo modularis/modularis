@@ -33,7 +33,7 @@ gulp.task(`browser-sync`, [`serve`], () =>
 );
 
 gulp.task(`serve`, () =>
-  nodemon({ script: `app/app.js`, watch: [`app/app.js`, `app/controller`, `app/lib`] })
+  nodemon({ script: `app/app.js`, watch: [`app/app.js`, `app/Classes`, `app/Http`] })
 );
 
 /**
