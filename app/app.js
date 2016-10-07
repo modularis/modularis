@@ -5,9 +5,10 @@ const fs = require(`fs`);
 const glob = require(`glob`);
 const path = require(`path`);
 
-const IndexController = require(`./controller/IndexController.js`);
-const ProductController = require(`./controller/ProductController.js`);
-const ViewLoader = require(`./lib/ViewLoader.js`);
+const IndexController = require(`./Http/Controllers/Index.js`);
+const ProductController = require(`./Http/Controllers/Product.js`);
+
+const ViewLoader = require(`./Classes/ViewLoader.js`);
 
 const app = express();
 
