@@ -1,4 +1,4 @@
-# modularis
+# modularis (DEPRECATED)
 modularis is a boilerplate project for modular web apps.
 
 ## Getting started
